@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <link href="../style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="box">
+      <ul id="list">
+        <li id="color">Red</li>
+      </ul>
+    </div>
+    <script>
+      const box = document.getElementById('box');
+      const list = document.getElementById('list');
+      const color = document.getElementById('color');
+
+      document.body.addEventListener('click', () => {
+        console.log('1. body');
+      });
+      box.addEventListener('click', () => {
+        console.log('2. div');
+      });
+      list.addEventListener('click', () => {
+        console.log('3. ul');
+      });
+      color.addEventListener('click', () => {
+        console.log('4. li');
+      });
+    </script>
+  </body>
+</html>
