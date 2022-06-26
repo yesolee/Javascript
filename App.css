@@ -12,6 +12,21 @@ div {
   border-bottom: 1px solid grey;
 }
 
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background: #eee;
+  text-align: left;
+}
+
+.weather {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: bisque;
+  color: blue;
+  text-align: left;
+}
+
 .black-nav {
   display: flex;
   background: black;
