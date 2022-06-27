@@ -20,3 +20,9 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
 동일한 componenet를 3개 불러와도 각각의 state는 영향받지 X
 
 > 8강 Props : properties 속성값
+
+> 10강 라우터 구현 : reat-router-dom
+* 버전6
+1) Switch -> routes
+2) component -> element
+3) Routes 자식은 Route만 가능 => component를 element 안으로 넣기
