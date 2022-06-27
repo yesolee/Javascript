@@ -6,9 +6,9 @@ import styles from './App.module.css';
 function App() {
   return (
     <div className='App'>
-      <Hello />
-      <Hello />
-      <Hello />
+      <Hello age={10} />
+      <Hello age={20} />
+      <Hello age={30} />
     </div>
   );
 }
