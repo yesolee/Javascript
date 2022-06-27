@@ -1,5 +1,5 @@
-#코딩앙마 react 6강
-이벤트처리 (Handling Events)
+#코딩앙마 react
+> 6강 이벤트처리 (Handling Events)
 
 함수 X 바로 만들기
 return ( <input type='text' onChange={(e)=>{ console.log(e.target.value);}} /> )
@@ -15,3 +15,6 @@ return( )
 function showText(txt){ console.log(txt); }
 
 return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText(txt); }} /> )
+
+> 7강 useState
+동일한 componenet를 3개 불러와도 각각의 state는 영향받지 X
