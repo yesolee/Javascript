@@ -1,16 +1,20 @@
-import './App.css';
-import Hello from './component/Hello';
-import Welcome from './component/Welcome';
-import styles from './App.module.css';
+import DayList from './component/DayList';
+import Header from './component/Header';
+import Day from './component/Day';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className='App'>
-      <Hello age={10} />
-      <Hello age={20} />
-      <Hello age={30} />
-    </div>
+    <BrowserRouter>
+      <div className='App'>
+        <Header />
+        <Routes>
+          <Route exact path='/' element={<DayList />} />
+          <Route path='/day' element={<Day />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
-////boolin type이나 객체는{변수}문법 X
+
 export default App;
