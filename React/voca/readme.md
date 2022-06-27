@@ -18,3 +18,5 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
 
 > 7강 useState
 동일한 componenet를 3개 불러와도 각각의 state는 영향받지 X
+
+> 8강 Props : properties 속성값
