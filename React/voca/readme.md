@@ -22,7 +22,16 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
 > 8강 Props : properties 속성값
 
 > 10강 라우터 구현 : reat-router-dom
-* 버전6
-1) Switch -> routes
-2) component -> element
-3) Routes 자식은 Route만 가능 => component를 element 안으로 넣기
+1.  버전6
+ 1) Switch -> routes
+ 2) component -> element
+ 3) Routes 자식은 Route만 가능 => component를 element 안으로 넣기
+
+2. Link to="여기에 변수를 넣어야 할때"
+ 1) 시도 : Link to=`바로 백틱 사용하면 오류남`
+ 2) 해결 : Link to ={`괄호 안에서 백틱 쓰면 해결!`}
+ 
+ 3. Day.js에서 word.day === Number(day) 를 했는데 빈페이지가 안나오는 이유
+ 1) APP.js를 보면 빈페이지는 경로가 * 일 경우이고,
+ /day/로 시작하면 빈페이지가 아닌 DAY페이지를 보여줌
+ 2) DAY페이지 중 <tobody>는 위의 const wordList에서 filter를 통해 특정 조건만 남겼으므로 해당이 안되는 항목은 없기 때문에 안나오는 것임
