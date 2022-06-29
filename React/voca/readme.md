@@ -39,13 +39,26 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
  > 11-12강
  1. json-server, REST API
  2. useEffect, fetch()
- 1) useEffect 특징 : 렌더링 되고 일어남
+ 1) useEffect
+ 
+ 가. 사용목적 : 렌더링 되고 이후에 API 호출해주고 싶을때 사용
+ 나. 특징 : 렌더링 되고 일어남
  예시) 버튼을 클릭할때마다 state값이 바뀌는 경우
  => 새로운 state가 재 렌더링 됨
  => useEffect도 렌더링 될때마다 작동함
- 2) useEffect 사용법
+ 다. useEffect 사용법
  첫번째 매개변수에 함수를 전달해줌 but 원하지 않을때(state가 변경되지 않을때)도 렌더링 되면 함수가 계속 호출됨
  => 두번째 매개변수에 배열(의존성 배열)을 넣어줌
  => 해당 배열이 변경될 때에만 함수가 호출됨
  예) useEffect(()=>{},[변경할 satate] )  
- => 그냥 맨 처음에만 호출하고 싶으면 빈 배열을 두번째 매개변수로 넣어줌!
+ => 그냥 맨 처음에만 호출하고 싶으면 빈 배열[]을 두번째 매개변수로 넣어줌!
+ 
+ 2) fetch()
+ 가. 사용목적 : API 비동기 사용을 위함
+ fetch(API주소)
+ 
+3. custom Hooks 
+ - 사용목적 : 반복적으로 사용되는 부분을 하나의 파일로 만들어
+ 재사용성을 높이고 수정을 용이하게 하기 위함.
+ - 사용법 : hooks라는 폴더를 만들고 use로 시작하는 js파일 생성
+ 
