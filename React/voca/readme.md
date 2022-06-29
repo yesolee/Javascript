@@ -35,3 +35,17 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
  1) APP.js를 보면 빈페이지는 경로가 * 일 경우이고,
  /day/로 시작하면 빈페이지가 아닌 DAY페이지를 보여줌
  2) DAY페이지 중 <tobody>는 위의 const wordList에서 filter를 통해 특정 조건만 남겼으므로 해당이 안되는 항목은 없기 때문에 안나오는 것임
+ 
+ > 11-12강
+ 1. json-server, REST API
+ 2. useEffect, fetch()
+ 1) useEffect 특징 : 렌더링 되고 일어남
+ 예시) 버튼을 클릭할때마다 state값이 바뀌는 경우
+ => 새로운 state가 재 렌더링 됨
+ => useEffect도 렌더링 될때마다 작동함
+ 2) useEffect 사용법
+ 첫번째 매개변수에 함수를 전달해줌 but 원하지 않을때(state가 변경되지 않을때)도 렌더링 되면 함수가 계속 호출됨
+ => 두번째 매개변수에 배열(의존성 배열)을 넣어줌
+ => 해당 배열이 변경될 때에만 함수가 호출됨
+ 예) useEffect(()=>{},[변경할 satate] )  
+ => 그냥 맨 처음에만 호출하고 싶으면 빈 배열을 두번째 매개변수로 넣어줌!
