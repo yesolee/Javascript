@@ -62,3 +62,24 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
  재사용성을 높이고 수정을 용이하게 하기 위함.
  - 사용법 : hooks라는 폴더를 만들고 use로 시작하는 js파일 생성
  
+ 4. CRUD
+ Create - POST
+ React - GET
+ Update - PUT
+ Delete - DELETE
+ 
+ > 14강 CRUD 중 Update(PUT 수정), Delete(DELETE 삭제)
+ 1) 사용법:
+ fetch(주소, 객체{
+ 요청의 옵션들을 입력
+  method : 'PUT',
+  headers : {
+   Content-Type(보내는 리소스의 타입 ) : 'application/json',-> 문자열, 이미지 html, 등등 가능 
+  },
+  body : JSON.stringify({
+   ...word,
+   isDone : !isDone
+  })
+ })
+GET : 단순히 가지고 옴
+PUT : 수정을 위한 정보들을 실어서 가져와야 함 -> body에 입력
