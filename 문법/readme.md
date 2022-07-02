@@ -102,6 +102,17 @@ const user = {
 
 user => {5: 5, 안녕하세요: 'Hello'}
 
+function makeObj(key, val) {
+    return {
+        [key] : val,
+    }
+}
+const obj = makeObj('나이',33);
+console.log(obj);
+//{나이: 33}
+
+const obj = makeObj('나이',33);
+console.log(obj);
 (2) 객체에서 사용할 수 있는 Methods
 가. Object.assign(초기값, 추가할 내용) : 객체 복제
 const user = {
