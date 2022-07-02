@@ -82,3 +82,84 @@ function User(name, age){
 }
 let user5 = new User('Han', 40);
 user5.sayName(); // 'Han'
+
+> 코딩앙마 JS 중급 3강
+
+# 3. 계산된 프로퍼티(computed property)와 객체 메소드(object methods)
+
+(1) computed property
+let a = 'age';
+const user = {
+  name : 'mike',
+  [a] : 30 // 대괄호로 묶어주면 변수 a에 할당된 값 => age : 30 
+}
+
+[식을 입력해도 ok]
+const user = {
+  [1+4] : 5,
+  ['안녕'+'하세요'] : 'Hello'
+}
+
+user => {5: 5, 안녕하세요: 'Hello'}
+
+(2) 객체에서 사용할 수 있는 Methods
+가. Object.assign(초기값, 추가할 내용) : 객체 복제
+const user = {
+  name : 'Mike',
+  age : 30
+} // user에는 객체가 저장되는 것이 아니고 객체의 참조값이 저장됨
+
+const cloneUser = user; // (X) 객체가 복사 되는 것이 아니라 객체의 참조값이 저장됨
+ 
+const newUser = Object.assign({}, user);
+=> {} + {name : 'Mike', age:30}
+=> 초기화 하는것이 아니라 더해주는 것
+
+Object.assign({gender : 'male'},user);
+gender : 'male',
+name:'Mike',
+age : 30,
+key가 같으면 있으면 덮어씀
+Object.assign({name : 'Tom'},user);
+name : 'Mike',
+age : 30,
+
+여러개도 한번에 합치기 가능
+const user = {
+  name : 'Mike',
+}
+const info1 = {
+  age : 30,
+}
+const info2 = {
+  gender : 'male',
+}
+Object.assign(user, info1, info2);
+
+나. Object.keys() : 키 배열 반환
+const user = {
+  name : 'Mike',
+  age : 30,
+  gender : 'male',
+}
+
+Object.keys(user); // ['name', 'age', 'gender']
+
+다. Object.values() : 값 배열 반환
+
+Object.values(user); // ['Mike', 30, 'male']
+
+라. Object.entries() : 키와 배열을 모두 반환
+
+Object.entries(user); // [['name', 'Mike'], ['age', 30], ['gender', 'male']]
+
+마. Object.fromEntries() : 반대로 키와 배열을 입력하면 객체로 반환해줌
+
+const arr = [
+  ['name','Mike'],
+  ['age',30],
+  ['gender','male'],
+];
+
+Object.fromEntries(arr);
+//{name: 'Mike', age: 30, gender: 'male'}
