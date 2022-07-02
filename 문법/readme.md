@@ -43,4 +43,42 @@ let name = 'Mike';
 나. const
 - 선언 + 초기화 + 할당
 
+> 코딩앙마 JS 중급 2강
+# 2. 생성자함수
 
+(1) 객체 리터럴
+let user = {
+  name : 'Mike',
+  age : 30,
+}
+
+(2) 생성자 함수
+가. 형태 : 첫글자는 대문자로 시작함
+function User(name, age){
+//this = {}
+  this.name=name;
+  this.age=age;
+//return this;  
+}
+
+나. 사용 : 객체 리터럴을 여러개 만들어야 할 때 쓴다.
+let user1 = new User('Mike', 30);
+let user2 = new User('Jane', 22);
+let user3 = new User('Tom', 17);
+
+=> 결과
+user1 = User {name: 'Mike', age:30}
+user2 = User {name: 'Jane', age:22}
+user3 = User {name: 'Tom', age:17}
+
+(3) method
+function User(name, age){
+  this.name=name;
+  this.age=age;
+  this.sayName = function(){
+    console.log(this.name); 
+    // this-> user5  
+  }
+}
+let user5 = new User('Han', 40);
+user5.sayName(); // 'Han'
