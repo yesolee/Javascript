@@ -83,3 +83,9 @@ return( <input type='text' onChange={(e)=>{ const txt = e.target.value; showText
  })
 GET : 단순히 가지고 옴
 PUT : 수정을 위한 정보들을 실어서 가져와야 함 -> body에 입력
+
+
+ > 15강 CRUD 중 Create(POST, 생성), useNavigate()
+ react-router v6에서 useHistory 네이밍 변화
+ useHistory.push('경로') -> useNavigate('경로')
+ 
