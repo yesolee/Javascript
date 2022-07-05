@@ -89,3 +89,7 @@ PUT : 수정을 위한 정보들을 실어서 가져와야 함 -> body에 입력
  react-router v6에서 useHistory 네이밍 변화
  useHistory.push('경로') -> useNavigate('경로')
  
+  > 16강 느린 인터넷 환경 테스트 : 개발자도구 > 네트워크 조건 > 느린 3G
+  - 여기서는 length가 있냐 없냐로 구분함
+  - 과제 : day 삭제 기능 , day간 이동 할때 화살표로 이동하기
+ 
