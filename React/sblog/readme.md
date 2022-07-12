@@ -206,3 +206,12 @@ e.target.value => input에 입력한 값
 3. 현재 날짜로 기록하기
 * getMonth는 0~11 사이 값이라서 +1을 해줘야 한다!
 
+# 13강 
+1. class : 변수/함수 보관하는 덩어리 
+2. extends : 오른쪽에 있는 놈의 성질을 물려받겠습니다.
+3. constructor : class의 변수/초기값 저장할 때 씁니다.
+- state는 constructor안에 작성
+- state 꺼내 쓰려면 this.state.state이름
+3. state변경
+- 신문법 : 새로운 값이 state를 대체해줌
+- 구문법 : 변경할 state만 넣기
