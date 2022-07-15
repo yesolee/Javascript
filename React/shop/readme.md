@@ -30,8 +30,6 @@ import bg from './img/cocktail.jpg';
  나. 내 사이트의 서브 경로가 있을 경우 : codingapple.com/어쩌구/에 발행할 경우
  - src={process.env.PUBLIC_URL + './cocktail.jpg'}
 
-
-> 2022-07-15
 ### export , import
 1. 언제 사용 ? 데이터가 많아서 다른 파일에 저장해놓고 그걸 사용하고 싶을때 등등..
 2. 어떻게 사용? 
@@ -50,3 +48,17 @@ import bg from './img/cocktail.jpg';
 - 1. 상품목록 컴포넌트로 만들기
 - 2. 데이터바인딩 새로 하기
 - 3. 반복적인 부분 map사용
+
+
+### 상세페이지
+- JS : html 여러개 만들어서 해당 페이지 불러옴
+- react : 컴포넌트 만들어서 상세페이지 내용 채움 => 누가 /detail 접속하면 그 컴포넌트 보여줌
+=> react-router-dom 라이브러리 쓰면 쉽게 만들 수 있음
+
+1. react-router-dom 사용법
+- 터미널 오픈 => npm install react-router-dom@6 //6버전
+- index.js 파일에 import {BrowserRouter} from "react-router-dom";
+root.render( ) 안에 있는 <App />을 <BrowserRouter>로 감싸줌
+
+** import 시 내가 만든 파일 경로는 './'로 시작함 아닌것들은 대부분 설치한 라이브러리 
+
