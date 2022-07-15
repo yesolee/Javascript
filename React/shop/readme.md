@@ -62,3 +62,36 @@ root.render( ) 안에 있는 <App />을 <BrowserRouter>로 감싸줌
 
 ** import 시 내가 만든 파일 경로는 './'로 시작함 아닌것들은 대부분 설치한 라이브러리 
 
+
+### Hook 
+- 유용한 함수같은거 들어있는 거 : use~로 시작하는 것들
+1. 페이지 이동 도와주는 useNavigate()
+            <Nav.Link
+              onClick={() => {
+                navigate('/detail'); // 이 함수 실행하면 이 페이지로 이동됨
+              }}
+              href='#pricing'
+            >
+
+ navigate(1)//앞으로 1페이지 이동
+ navigate(-1)//뒤로 1페이지 이동
+ 
+ 2. 404페이지 (없는페이지)
+<Route path='*' element={<div>없는페이지에요</div>} /> / *:그 외 모든것
+
+3. Nested Routes : 태그안에 태그 들어간거
+1) <Route path='/about/location' element={<div>위치임</div>} />이거대신에
+        
+2) 이렇게 쓰는걸 말함
+<Route path='/about' element={<About />}>
+ <Route path='member' element={<div>멤버임</div>} />
+</Route>
+
+3) Nested Routes장점 : nested route 접속시엔 element 2개나 보임 (about꺼랑 member꺼)
+- 대신 어디 보여줄지 작성해야함 => about 컴포넌트 안에 원하는 위치에 outlet사용
+- 작성안하면 상위의 about꺼만 보임
+
+4) Nested Routes왜쓰는거야/ 어디쓰는거야?
+- 여러 유사한 페이지 필요할 때
+
+5) Routes장점 : 이런식으로 UI만들면 뒤로가기 버튼 이용 가능, 페이지 이동이 쉬움(UI스위치 조작 쉬움)
