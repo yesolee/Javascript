@@ -95,3 +95,7 @@ root.render( ) 안에 있는 <App />을 <BrowserRouter>로 감싸줌
 - 여러 유사한 페이지 필요할 때
 
 5) Routes장점 : 이런식으로 UI만들면 뒤로가기 버튼 이용 가능, 페이지 이동이 쉬움(UI스위치 조작 쉬움)
+
+3. 상세 페이지 많이 만들고 싶다면? URL 파라미터 사용!
+- <Route path='/detail/:id' element={<Detail cocktail={cocktail} />} /> // :id는 작명 가능, 아무거나 오면~이라는 뜻
+- useParams라는 훅 사용!
