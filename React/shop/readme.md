@@ -29,3 +29,24 @@ import bg from './img/cocktail.jpg';
  - public폴더 이미지 사용할땐 그냥 /이미지경로 (src='/cocktail.jpg')
  나. 내 사이트의 서브 경로가 있을 경우 : codingapple.com/어쩌구/에 발행할 경우
  - src={process.env.PUBLIC_URL + './cocktail.jpg'}
+
+
+> 2022-07-15
+### export , import
+1. 언제 사용 ? 데이터가 많아서 다른 파일에 저장해놓고 그걸 사용하고 싶을때 등등..
+2. 어떻게 사용? 
+ 1) data가 들어있는 js 파일 : data.js
+'- 1개만 내보낼때 : export default 내보내고 싶은 변수 ; 
+'- 2개 이상 내보낼때 : export {내보내려는 변수이름, 내보내려는 다른 변수 이름}
+ 2) 사용하려는 js파일 : App.js
+'- 1개만 가져와쓸때(복사) : import 원하는 이름 작명 from '파일경로'; 
+'- 2개 이상 내보낼때 : import {가져오려는 변수이름, 가져오려는 다른 변수 이름} from '파일경로'; //작명불가
+
+2. 데이터 뽑기
+- 시작기호가 [이거면 aaray : 인덱싱[0]으로 접근
+- 시작기호사 {이거면 object : .key이름
+
+** 숙제 
+- 1. 상품목록 컴포넌트로 만들기
+- 2. 데이터바인딩 새로 하기
+- 3. 반복적인 부분 map사용
