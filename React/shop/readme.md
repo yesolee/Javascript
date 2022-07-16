@@ -99,3 +99,77 @@ root.render( ) 안에 있는 <App />을 <BrowserRouter>로 감싸줌
 3. 상세 페이지 많이 만들고 싶다면? URL 파라미터 사용!
 - <Route path='/detail/:id' element={<Detail cocktail={cocktail} />} /> // :id는 작명 가능, 아무거나 오면~이라는 뜻
 - useParams라는 훅 사용!
+
+## styled-components 라이브러리
+- 터미널 서리 : npm install styled-components
+- js파일에 import (import styled from 'styled-components')
+* 이쁜 버튼 만들고 싶으면? className넣고 css 파일 가야함
+- 라이브러리 쓰면 js파일에서 전부 해결 가능
+let YellowBtn = styled.button` //하나의 컴포넌트이기 떄문에 대문자로 시작하는 작명
+  background : yellow;
+  color:black;
+  padding:10px; //백틱 안에 스타일 지정
+` : 방금 버튼태그 만든것임
+// 사용도 컴포넌트처럼 사용
+< YellowBtn> 버튼 </ YellowBtn>
+
+1. 장점 : 다른 js파일 간섭X -> css오염x (react 는 파일을 하나로 합쳐서)
+- 다른방법 : App(컴포넌트명).module.css 로 파일 만들면 App.js에만 적용이 됨
+
+2. 로딩시간이 단축됨
+css파일 만드는게 아니라 <style></style>태그로 넣어 줘서
+
+3. 비슷하게 여러번 쓰고 싶다면 ? props문법쓰면됨!
+let YellowBtn = styled.button`
+  background: ${(props) => props.bg};
+  color: ${(props) => (props.bg == 'blue' ? 'white' : 'black')}; //간단한 프로그래밍 가능
+  padding: 10px;
+`;
+--
+      <YellowBtn bg='blue'>버튼</YellowBtn>
+
+let Btn = styled.button(YellowBtn) // 복사해서 쓸수도 있음
+
+4. 단점 : js파일 매우 복잡해짐
+5. 중복스타일은 컴포넌트 간 import 할텐데 그럼 css와 다를 바가 없음
+6. 협업시 css 담당의 숙련도 이슈
+7. 연습 : 직접 여러가지 레이아웃 만들어보기
+
+#컴포넌트의 Lifecycle 인생주기
+1. 개념
+- 페이지에 장착되기도 하고 (mount)
+- 가끔 업데이트 되고 (update)
+- 필요없으면 제거되고 (unmount)
+
+=> 왜 알아야 하나? : 중간 중간 코드실행 가능 - 갈고리 다는 것처럼(훅)
+
+2. 사용법
+1) 과거 버전
+class Detail2 extends React.Component {
+  componentDidMount() {
+
+  }
+  componentDidUpdate() {
+
+  }
+  componentWillUnmount() {
+
+  }
+}
+
+2) 요즘버전
+useEffect라는 훅을 씀 : 훅 -갈고리
+
+export default function Detail(props) {
+  useEffect(() => {
+    // mount 시 실행 (2번실행됨, 디버깅을 위해서 , 배포 이후 발행하고나서는 1번 동작 )
+    // update 시 실행 : 재렌더링 ->state변경
+    console.log('안녕');
+  });
+
+***     console.log('안녕');를 useEffect 밖에 써도 동작함 -> 호잉... 언제쓰는거지? 왜쓰는 거?
+useEffect(()=>{
+  요 안의 코드는 렌더링이 다 된 이후에(html이 로딩이 다 된 이후에) 실행이 됨.
+  자바스크립트는 위에서 아래로 죽 내려오기떄문에
+  오래걸리는 for문 등등 을 이 안에 넣어주면 html이 먼저 뜸!
+})
