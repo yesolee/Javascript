@@ -171,5 +171,45 @@ export default function Detail(props) {
 useEffect(()=>{
   요 안의 코드는 렌더링이 다 된 이후에(html이 로딩이 다 된 이후에) 실행이 됨.
   자바스크립트는 위에서 아래로 죽 내려오기떄문에
-  오래걸리는 for문 등등 을 이 안에 넣어주면 html이 먼저 뜸!
+  오래걸리는 **어려운 연산, 서버에서 데이터 가져오는 작업, 타이머 장착 등***
+  이 안에 넣어주면 html이 먼저 뜸!
 })
+
+3) 왜 이름이 Effect ?
+Side Effect 함수의 핵심기능(html렌더링 등)과 상관없는 부가기능
+
+4) 실행조건 [여러개 가능1, 여러개가능2]
+- useEffect(()=>{}, [count]) // mount시, count라는 state가 변할때만 실행됨 =>[count]를 dependency라고 부름
+- 꼼수! []공란으로 두면 update시에는 반영X, mount시에만 실행됨
+- return ()=>{} 입력시 useEffect 동작 전에 실행됨 : clean up function
+  useEffect(() => {
+    let a = setTimeout(() => {
+      setAlertBox(!alertBox);
+    }, 2000);
+    return () => {
+      기존 타이머는 제거해 주세요 ~~ //react는 타이머가 많아서 에러 막기위해 필요!
+      clearTimeout(a) //타이머 제거해주는 함수임
+    };
+  }, [count]);
+  
+  ** 주의 : 서버로 데이터 요청 시 2초 소요될 경우, 가져오는 도중에 재 렌더링이 되면 또 서버에 요청을 날리고... 꼬임
+    return () => {
+      기존 요청은 제거해 주세요 ~~ 
+      clearTimeout(a) //타이머 제거해주는 함수임
+    };
+    clean up fucntion은 mount시 실행안됨, unmount시 실행됨!
+    
+    정리!!
+    1. 재렌더링마다 코드 실행하고 싶다
+    useEffect( ()=>{} )
+    2. 컨포넌트가 로드 될때 딱 한번만 실행하고 싶다
+    useEffect( ()=>{} , [])    
+    3. 컴포넌트가 삭제 될때 1번만 실행하고 싶다(unmount시)
+    useEffect( ()=>{
+      return ()=>{
+        
+      }
+    } , [])
+    4. useEffect 실행 전에 뭔가 실행하려면 
+    언제나 return ()=>{}
+    5. 특정state변경시에만 실행하려면 [state명] //첫 mount시에도
