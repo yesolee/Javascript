@@ -213,3 +213,9 @@ Side Effect 함수의 핵심기능(html렌더링 등)과 상관없는 부가기�
     4. useEffect 실행 전에 뭔가 실행하려면 
     언제나 return ()=>{}
     5. 특정state변경시에만 실행하려면 [state명] //첫 mount시에도
+
+## input 태그
+1. type을 text로 할 경우 숫자를 입력해도 typeof는 text
+- <input type = 'text'></input> 후 typeof Number(e.target.value) 하면 글자던 숫자던 다 Number가 나옴..
+- Number(입력값) >= 0 || Number(입력값) < 0 하면 숫자는 true,  문자는 false
+- 또 다른 방법 :  isNaN (숫자는 false, 문자는 true)
