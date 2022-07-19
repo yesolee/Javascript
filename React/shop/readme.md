@@ -219,3 +219,20 @@ Side Effect 함수의 핵심기능(html렌더링 등)과 상관없는 부가기�
 - <input type = 'text'></input> 후 typeof Number(e.target.value) 하면 글자던 숫자던 다 Number가 나옴..
 - Number(입력값) >= 0 || Number(입력값) < 0 하면 숫자는 true,  문자는 false
 - 또 다른 방법 :  isNaN (숫자는 false, 문자는 true)
+
+## Axios 서버 통신
+1. 서버에 데이터를 요청할건데..
+ 1) 서버 : 데이터 요청하면 진짜로 데이터 보내주는 프로그램
+ 2) 서버개발시 짜는 코드 : 누가 A요청하면 A 보내주세용
+ 3) 요청방법 : 1. 방법(GET가져오기/POST보내기) / 2. 어떤자료(URL) URL은 서버개발자에게 물어보면됨 
+
+2. GET요청 하는법
+ 1) 브라우저 주소창 : GET요청하는 곳 but GET/POST 요청 시 새로고침됨
+ 2) ajax 사용 - 새로고침 없이 JS로 요청 가능
+  - 3가지 방법 중 선택 (1. XMLHttpRequest 옛날JS JS, 2. fetch() 요즘JS문법, 3. axios 외부라이브러리 )
+  - 터미널에 설치 : npm install axios(라이브러리) 후 import axios from 'axios'; axios.get('url').then()
+  - ajax요청 실패할 경우 ? .catch( ()=>{} )
+  
+  ***동적인 UI 만드는법 !! 잘 기억해둡시다
+  
+  ** 배열을 복사할때 꿀팁 let copy = [...shoes, ...결과.data]
