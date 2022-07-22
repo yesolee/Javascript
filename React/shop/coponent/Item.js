@@ -10,7 +10,7 @@ export default function Item(props) {
         navigate('/detail/' + props.cocktail.id);
       }}
     >
-      <img src={props.cocktail.link} width='80%' height='240vw'></img>
+      <img src={props.cocktail.link} width='80%' height='320vw'></img>
       <h4>{props.cocktail.title}</h4>
       <p>{props.cocktail.price}</p>
     </Col>
