@@ -1,10 +1,29 @@
 import { Container, Row } from 'react-bootstrap';
 import Item from '../component/Item.js';
 import bgimg from '../img/cockimg.jpg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function Main(props) {
   let [cock, setCock] = useState([...props.cocktail]);
+  let [count, setCount] = useState(1);
+  let [load, setLoad] = useState(false);
+  let [more, setMore] = useState(false);
+
+  useEffect(() => {
+    count > 1 &&
+      axios
+        .get(`https://yesolee.github.io/shop/data${count}.json`)
+        .then((결과) => {
+          let copy2 = [...cock, ...결과.data];
+          props.setCocktail(copy2);
+          setCock(copy2);
+          setLoad(false);
+        })
+        .catch(() => {
+          setLoad(false);
+        });
+  }, [count]);
   return (
     <>
       <div
@@ -34,10 +53,26 @@ export default function Main(props) {
       </button>
       <Container>
         <Row>
-          {cock.map((item) => {
-            return <Item cocktail={item} />;
+          {cock.map((item, i) => {
+            return <Item cocktail={item} key={i} />;
           })}
         </Row>
+        {more == false &&
+          (cock.length < 9 ? (
+            <button
+              onClick={() => {
+                setLoad(true);
+                let copyCount = count;
+                copyCount++;
+                setCount(copyCount);
+                copyCount == 3 && setMore(true);
+              }}
+            >
+              더보기
+            </button>
+          ) : null)}
+        {load == true ? <p style={{ fontSize: '30px' }}>로딩중...</p> : null}
+        {/* {axios.post('https://yesolee.github.io/shop/data3.json', { id: '9' })} */}
       </Container>
     </>
   );
