@@ -293,4 +293,29 @@ state변경함수() -> 재렌더링 x
 state변경함수() -> 재렌더링 O => 마지막에 재렌더링 해줌
 => setTimeout 처럼 시간차 두면 해결
 
+# single Page Application 단점 : 컴포넌트 간 state 공유 어려움
+- 부모컴포넌트 -> 자식컴포넌트 props 전송은 가능
+
+1. App > Detail > TabContent : state 전송시 한번에 X 
+: cocktail={cocktail} props전송해줌  => cocktail = {props.cocktail} 한번더 props 전송해줌
+문제점 : 10번 넘게 중첩되면 복잡하고 귀찮음
+
+해결법
+1_ Context API(react기본문법)
+- props전송없이 state공유가능
+- but 성능이슈, component재활용이 어려워서 잘 안씀
+<단점>
+1) 부모 state 변경시 쓸데없는것까지 재렌더링, 자식 Coponent 중에서 {재고}안쓰는 컴포넌트들도 다 재렌더링 됨
+2) 자식 컴포넌트가 context 문법을 사용하고 있으면 이 컴포넌트를 다른 컴포넌트에서 사용하고 싶을때 이상해질 수 있음 (재사용이 어려움)
+
+1) createContext() import 하고 함수 밖에 state 보관함(context) 만듬 (변수에 담아줌) => export하기
+2) <Context>로 원하는 컴포넌트(Detail) 감싸고 value={{전달하고 싶은 state이름 넣기}}
+3) 사용하고자 하는 컴포넌트로 가서 import {} from './../App.js'
+4)   useContext를 import 하고 
+  let { 재고, cocktail } = useContext(Context1); // 보관함 해체 
+5) 컴포넌트의 자식(TapContent)에서도 useContext()사용
+  let { 재고 } = useContext(Context1); => props 함수의 변수로 담을 필요 X
+
+
+2. 외부 라이브러리(Redux 등) 사용 
 
