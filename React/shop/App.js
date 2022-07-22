@@ -1,15 +1,19 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
+import Cart from './pages/Cart';
 import Empty from './pages/Empty';
 
+export let Context1 = createContext();
+
 function App() {
-  let [cocktail] = useState(data);
+  let [cocktail, setCocktail] = useState(data);
   let navigate = useNavigate();
+  let [재고] = useState([10, 11, 12]); // Detail, Tabcontent에서 쓰고 싶은 경우
 
   return (
     <div className='App'>
@@ -25,29 +29,40 @@ function App() {
           <Nav className='me-auto'>
             <Nav.Link
               onClick={() => {
-                navigate('/');
+                navigate('/categories');
               }}
             >
-              Home
+              Categories
             </Nav.Link>
-            <Nav.Link href='#features'>Categories</Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate('/detail');
+                navigate('/cart');
               }}
             >
-              Detail
+              Cart
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <Routes>
-        <Route path='/' element={<Main cocktail={cocktail} />} />
-        <Route path='/detail/:id' element={<Detail cocktail={cocktail} />} />
+        <Route
+          path='/'
+          element={<Main cocktail={cocktail} setCocktail={setCocktail} />}
+        />
+        <Route
+          path='/detail/:id'
+          element={
+            <Context1.Provider value={{ 재고, cocktail }}>
+              <Detail cocktail={cocktail} />
+            </Context1.Provider>
+          }
+        />
+        } />
         <Route path='/event' element={<EventPage />}>
           <Route path='one' element={<p>첫 주문시 양배추즙 서비스</p>} />
           <Route path='two' element={<p>생일기념 쿠폰받기</p>} />
         </Route>
+        <Route path='/cart' element={<Cart />} />
         <Route path='*' element={<Empty />} />
       </Routes>
     </div>

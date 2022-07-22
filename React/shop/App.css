@@ -7,6 +7,17 @@
   pointer-events: none;
 }
 
+.start {
+  opacity: 0;
+  /* transform: scale(0); */
+}
+
+.end {
+  opacity: 1;
+  /* transform: scale(1); */
+  transition: opacity 1s;
+}
+
 .navBar {
   padding: 20px;
   font-size: 25px;
