@@ -324,3 +324,87 @@ state변경함수() -> 재렌더링 O => 마지막에 재렌더링 해줌
   2) th, td 줄 중 하나 : 세로줄
   3) thead 제목 / tbody 
   
+  1. redux 설치
+-  npm install @reduxjs/toolkit react-redux
+-  store.js 파일 생성 후 
+import { configureStore } from '@reduxjs/toolkit';
+
+export default configureStore({
+  reducer:{
+    
+  }
+})
+
+- index.js가서 <Provider store={store}>로 감싸주기
+
+2) redux 왜씀 ? 컴포넌트 간 state 공유 편해짐 props전송 필요없음
+ 가. store.js파일
+- createSlice를 import 해오기
+- createSlice를 이용한 하나의 slice 생성
+let user = createSlice({
+  name: 'user',
+  initialState: 'Kim',
+});
+
+- reducer에 등록
+export default configureStore({
+  reducer: {
+    user: user.reducer,
+  },
+});
+ 나. Cart.js 사용하려는 컴포넌트
+ - useSelector 를 import (redux)
+ - useSelector((state)=>{return state})로 Redux store 가져오기
+ 원하는것만 가져오고 싶으면 return state.user , 중괄호랑 return은 생략 가능 : useSelector((state)=> state.user)
+
+
+3. 컴포넌트 몇개 없으면 props가 더 편함
+
+4. redux 쓴다고 해서 sotre안에 다 넣을 필요 없음. 공유필요없으면 그냥 useState쓰면 됨.
+
+5. Redux의 state변경하는법
+- state수정해주는 함수 만들고,
+- 원할때 그 함수 실행해달라고 store.js에 요청
+(1) state 수정해주는 함수 만들기
+reducers : {
+  함수명() {
+    return '변경 후 state이름'
+  },
+  함수명2() {
+  }
+  .. 여러개 생성 가능
+}
+
+(2) 만든 함수를 export 해야 함
+slice 밖에서
+- 보관함이름.actions => state 변경함수들이 남음
+- 귀찮으니까 distructuring 문법(변수로 빼는 문법) 사용 export let { changeName } = user.action;
+
+(3) 만든 함수를 import 해서 사용
+- import { changeName } from '파일경로'
+- useDispatch 를 import => let dispatch = useDispatch(); store.js로 요청 보내주는 함수임
+- dispatch(state변경함수()) 사용
+
+(4) 결론 : 그지같음 but 사이즈가 커지면 버그 방지 할 수 있어서 좋은 방식임~!
+- 모든 컴포넌트들이 직접 state 수정하면 에러 났을 때 어떤 컴포넌트에서 오류가 났는지 찾기 어려움. 
+- state 변경을 요청하는 형식으로 진행하면 버그 났을때 store.js만 찾아보면 됨
+
+(5) state 변경 : array/object의 경우
+
+let user = createSlice({
+  name: 'user',
+  initialState: { name: 'Kim', age: 20 },
+  reducers: {
+    changeName(state) {
+      return { name: 'park', age: 20 };
+    },
+  },
+});
+
+- array/ object 의 경우 직접 수정해도 state 변경됨
+  reducers: {
+    changeName(state) {
+      state.name = 'park' // immer.js라이브러리가 자동으로 설치되서 state 복사본을 return해줘서 그냥 이렇게 짜도 변경 가능
+    },
+  },
+
