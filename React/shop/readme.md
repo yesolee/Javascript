@@ -401,10 +401,21 @@ let user = createSlice({
   },
 });
 
-- array/ object 의 경우 직접 수정해도 state 변경됨
+- array/ object 의 경우 return없이 직접 수정해도 state 변경됨 => 그래서 문자하나만 필요해도 일부러 {}안에 담기도 함
   reducers: {
     changeName(state) {
       state.name = 'park' // immer.js라이브러리가 자동으로 설치되서 state 복사본을 return해줘서 그냥 이렇게 짜도 변경 가능
     },
   },
+  
+  - 함수 안에 파라미터 사용하고 싶을 경우 .payload(화물, 소포, 택배..._) 써주면 됨
+      changeAge(state, action) {    // action : state 변경함수
+      state.age += action.payload;
+    },
+  
+  changeAge(10) // a=10 메세지에 싣어보내는 화물임
 
+  - 파라미터 잘 쓰면 함수 여러개 안만들어도 됨!
+  
+  
+  
