@@ -324,7 +324,7 @@ state변경함수() -> 재렌더링 O => 마지막에 재렌더링 해줌
   2) th, td 줄 중 하나 : 세로줄
   3) thead 제목 / tbody 
   
-  1. redux 설치
+  1. redux 설치 ------- Redux가 복잡해서 요즘은 Redux 개선 버전인 Redux Toolkit 사용
 -  npm install @reduxjs/toolkit react-redux
 -  store.js 파일 생성 후 
 import { configureStore } from '@reduxjs/toolkit';
@@ -417,5 +417,14 @@ let user = createSlice({
 
   - 파라미터 잘 쓰면 함수 여러개 안만들어도 됨!
   
+  # store의 state의 수정은
+  1. 수정함수 만들기
+  2. export
+  3. 원하는 곳에서 import 
   
   
+  ** 숙제 : 삭제기능 만들기
+  - 문제점 :  slice 사용하였으나 state에 반영이 안됨 
+  - 해결1 : slice는 shallow copy라서 변경이 안되므로 slice를 return 값으로 넣어줘야함!
+  - 해결2 : slice는 삭제된걸 남기므로 splice를 써야함 !!
+  - 해결3 : splice는 직접 수정되므로 return 지워주자!!!
