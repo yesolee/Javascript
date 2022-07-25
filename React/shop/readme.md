@@ -424,7 +424,11 @@ let user = createSlice({
   
   
   ** 숙제 : 삭제기능 만들기
-  - 문제점 :  slice 사용하였으나 state에 반영이 안됨 
+  - 문제1 :  slice 사용하였으나 state에 반영이 안됨 
   - 해결1 : slice는 shallow copy라서 변경이 안되므로 slice를 return 값으로 넣어줘야함!
   - 해결2 : slice는 삭제된걸 남기므로 splice를 써야함 !!
   - 해결3 : splice는 직접 수정되므로 return 지워주자!!!
+  
+  - 문제2 : alert 말고 confirm창은 어떻게 쓸까?
+  - 해결 : window.confirm('메세지') && 참일때 실행할 내용
+  
