@@ -432,3 +432,30 @@ let user = createSlice({
   - 문제2 : alert 말고 confirm창은 어떻게 쓸까?
   - 해결 : window.confirm('메세지') && 참일때 실행할 내용
   
+# localStorage
+
+
+** 브라우저를 새로고침하거나 재 접속하면, HTML,JS파일을 처음부터 다시 읽기 때문에 state도 초기값으로 돌아감
+-> state를 서버로 보내서 DB에 영구 저장하면 초기값으로 안돌아가고 남아있음
+-> 서버 말고 다른 방법은 localStorage사용하면 반영구적으로 사용가능(브라우저 청소하면 삭제됨)
+-> session storage는 브라우저 끄면 날아감
+
+1. 로컬스토리지 사용법
+- 브라우저에서 개발자도구>어플리케이션>Storage>localStorage
+- key : value 형태로 저장가능 
+- 문자만, 5MB까지 저장가능 =>array나 object는 저장 못함 but JSON으로 바꾸면 가능! JSON.stringfy(object자료)
+- 유저몰래 localStorage에 저장하는법 ! 
+  -> 데이터 저장은 localStorage.setItem('이름','값')
+  -> 데이터 출력은 localStorage.getItem('이름')
+  -> 데이더 삭제는 localStorage.removeItem('age')
+  -> 데이터 수정하는 문법은 없어서 데이터 꺼내와서 수정하고 다시 집어넣으면 됨
+  -> array나 object는 저장 못함 but JSON으로 바꾸면 가능! JSON.stringfy(object자료)
+     이때 가져올때도 다시 object형으로 변환해줘야함
+     
+     localStorage.setItem('data', JSON.stringify(obj));
+  console.log(JSON.stringify(obj)); //{"name":"kim"} JSON
+  let 꺼낸거 = localStorage.getItem('data');
+  console.log(JSON.parse(꺼낸거).name); //{name: 'kim'} Object
+  
+  
+  
