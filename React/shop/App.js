@@ -1,12 +1,13 @@
 import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data.js';
 import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
 import Empty from './pages/Empty';
+import Recent from './component/Recent';
 
 export let Context1 = createContext();
 
@@ -14,6 +15,10 @@ function App() {
   let [cocktail, setCocktail] = useState(data);
   let navigate = useNavigate();
   let [재고] = useState([10, 11, 12]); // Detail, Tabcontent에서 쓰고 싶은 경우
+
+  useEffect(() => {
+    localStorage.setItem('watched', JSON.stringify([]));
+  }, []);
 
   return (
     <div className='App'>
@@ -44,6 +49,7 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      <Recent />
       <Routes>
         <Route
           path='/'

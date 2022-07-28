@@ -7,6 +7,14 @@
   pointer-events: none;
 }
 
+/* .mainList {
+  display: flex;
+} */
+
+/* .itemList {
+  align-items: flex-start;
+} */
+
 .start {
   opacity: 0;
   /* transform: scale(0); */
@@ -26,6 +34,7 @@
 .navbar-brand {
   font-size: 30px;
 }
+
 .main-bg {
   height: 500px;
   /* background-image: url('./img/cocktail.jpg'); */
