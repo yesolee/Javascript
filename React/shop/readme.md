@@ -457,5 +457,24 @@ let user = createSlice({
   let 꺼낸거 = localStorage.getItem('data');
   console.log(JSON.parse(꺼낸거).name); //{name: 'kim'} Object
   
+  # 코드짜는 법을 모른다면
+  1. 컴퓨터한데 아주 상세히 설명해줘야함 
+  2. 방법 : 코드부터X 한글먼저 쓰고 코드로 옮기기
+  예) 누가 Detail 페이지 접속하면 2. 상품번호 가져와서 3. localStorage에 watched 항목에 추가
+  => JS로 번역
+  1) Detail componenet로 이동, useEffect(()=>{
+    let 꺼낸거 = localStorage.getItem('watched')
+    꺼낸거 = JSON.parse(꺼낸거)
+    꺼낸거.push(찾은상품.id)
+    꺼낸거 = new Set(꺼낸거)
+    꺼낸거 = Array.from(꺼낸거)
+    localStorage.setItem('watched', JSON.stringify([꺼낸거])
+  })
+
+3. 사이트 재 접속시에도 데이터 유지되게 만들려면 localStorage 사용
+=> 모든 state를 localStorage에 자동 저장 ? redux-persist 같은 라이브러리 사용
+
+4. Redux : state 관리 library 
+- 다른 라이브러리 : Jotai, Zustand 리덕스와 비슷하고 더 쉬움
   
   
