@@ -7,13 +7,14 @@
   pointer-events: none;
 }
 
-/* .mainList {
+.mainList {
   display: flex;
-} */
+  flex-direction: row;
+}
 
-/* .itemList {
-  align-items: flex-start;
-} */
+.recentList {
+  margin-right: 30px;
+}
 
 .start {
   opacity: 0;
