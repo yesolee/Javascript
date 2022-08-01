@@ -476,5 +476,126 @@ let user = createSlice({
 
 4. Redux : state 관리 library 
 - 다른 라이브러리 : Jotai, Zustand 리덕스와 비슷하고 더 쉬움
+
+# 실시간 데이터가 중요하며 => React-query 
+- ajax 성공시/실패시 html 보여주려면? => 다른UI 보여주고 싶을때
+- 몇초마다 자동으로 ajax 요청? 
+- 실패시 몇초 후 요청 재시도?
+- prefetch? 
+=> 실시간 SNS, 코인 같이 실시간 데이터를 계쏙 가져와야 하는 사이트에 쓰면 좋음
+
+1. 사용법
+- 터미널에 npm install @tanstack/react-query
+- index.js로 가서  <QueryClientProvider client={queryClient}> </QueryClientProvider>로 감싸줌
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+const queryClient = new QueryClient;
+
+2. useQuery로 감싸면 장점
+1) ajxa요청이 성공했는지 실패했는지 로딩중인지 쉽게 파악 가능
+- result.data
+- result.isLoading // 요청중이면 true가 반환됨
+- result.error // 실패했다면 true
+2) state 만들 필요 없음
+3) 틈만나면 자동으로 재요청(refetch_해줌)
+- 시간 간격 조정할 수 있음 => { staleTime: 2000 }
+4) 실패시 retry 알아서 해줌
+5) state 공유 안해도 됨. ajax 요청해서 가져올 수 있음 but 똑같은 요청 2번이나? => react-query는 똑똑해서 한번만 해줌
+- ajax 성공결과를 기억함(캐싱) => 똑같이 실행하면 그 결과를 우선적으로 가져와서 보여주고, ajax 수행
+- redux=toolkit 설치하면 RTK Queryeh 자동으로 설치되나, 복잡함
+
+# 성능개선, 디버깅, 버그찾기 팁
+
+- 버그 발생 예)
+- props 보냈는데 왜 출력 안되는것? 왜 이미지 안나옴?
+=> 코드를 확인하거나 개발자도구를 킴
+- 요소 tap에서 html/css 검사 가능
+- 우리가 만든건 컴포넌트인데 검사 도구에서는 html로 보임
+
+1.  컴포넌트 구조를 보고싶다 => 크롬 확장프로그램 설치(React Developer Tools)
+=> props, state 같은거 확인하기 좋음
+=> 성능저하되는 컴포넌트 범인찾기
+=> 대부분의 지연 시간은 서버에서 데이터 늦게와서 그럼(서버가 느린거임) ajax 요청 같은거
+
+2. Redux DevTools 크롬 확장프로그램 설치
+- store 한 눈에 보여줌
+- state 변경한 내역 알려줌
+
+3. React로 만든 페이지 => Single Page Application
+- 발행(build)하면 하나의 js파일에 모든 코드 다 쑤셔넣음 : 사이즈가 매우 큼
+=> 유저가 메인 페이지 접속하면 html 파일 > css파일 >  큰 js파일 다운 받음 => 로딩 속도가 느림
+=> 쪼갤 수 있음 :  lazy()사용 => 필요해질때 import 해주세요~ => 메인페이지 로딩 속도 개선
+가. 방법 : import {lazy} from 'react';
+
+const Detail = lazy(() => import('./pages/Detail.js'));
+const Cart = lazy(() => import('./pages/Cart.js'));
+
+=> 사이트 발행할 때도 별도의 js파일로 분리됨
+
+나. 단점 : Cart, Detail 페이지로 유저가 이동하면 컴포넌트 로딩시간 발생
+=> Suspense 를 import 후 컴포넌트를(Routes를 감싸도 됨) Suspense로 감싸고 fallback속성 안에 로드 할 동안 보여줄 html작성
+
+4. 자식 컴포넌트의 재랜더링 막고 싶을때
+=> 렌더링 시간이 오래 걸리는 컴포넌트가 자식이면 성능이 저하됨
+=> 꼭 필요할때만 재렌더링해라 : memo()사용  (import { memo} from 'react';)
+// memo의 원리 : props가 변할때만 재ㅐ렌더링해줌 => 매번 props가 변경되었는지 비교할것임 => props가 길고 복잡하면 손해일수도있음.
+=> 꼭 필요한 무거운 컴포넌트에만 사용 : 대부분 쓸일X
+
+5. useMemo 사용법
+  let result = useMemo(()=>{return 함수()}, [state]) // useMemo() import
+  함수가 엄청 오래걸리는 경우 useMemo사용하면 컴포넌트 렌더링시 1회만 실행해줌
   
-  
+ 6. Memo는 html return문 보여주고 실행, useMemo는 렌더링되면 같이 실행됨
+ 
+ 7. batch 기능
+ - state1변경()
+ - state2변경()
+ - state3변경()
+ => 이런식으로 연달아 뭉쳐있으면 재 렌더링이 맨 마지막에 한번만 딱 일어남 : batch
+ => 예외) ajax, setTimeout 늦게 동작하는거 내부라면 batching이 일어나지 않았는데, react 업데이트 되면서 batching됨
+ 
+ 2. useTransition으로 느린 컴포넌트 성능 향상 가능 : 카드 빚 돌려막기
+ 조작 후 0.2 초 넘게 걸리면 유저는 느리다고 생각함
+ 해결법 
+ 1. html이 많으면 나누기
+ 2. useTransition()사용 //import 해와서
+ - 지연되는 원인이 되는 state를 useTranstion()으로 감싸주기
+ => 동작원리 : 1) 브라우저는 한번의 하나의 작업만 가능(single thread)
+ 브라우저가 할일 1. a를 <input>에 보여주기 2. div 박스 10000개 만들기 => 오래걸림
+ let [isPending, 늦게처리(startTransition] = useTranstion();
+ startTransition(()=>{함수()}) a를 input에 보여주기 => 시간 생기면 div 만들어주기
+ isPending은 처리 중일때 true임
+ 
+ 3. useTransition()과 같은 기능
+ => useDeferredValue() // 뭔가 감싸거나 하진 않고 props나 state 담을 수 있음
+ let state = useDeferredValue(name) : name이라는 state 변경될때마다 좀 늦게 처리해줌
+ 
+ # PWA
+ - 바로가기 버튼인데 앱처럼 보임
+ - 장점 : 설치 마케팅 비용 적음 
+ - 아날로그 유저들 배려
+ - html css js만으로 앱까지
+ - 푸시알림, 센서 등 사용 가능 
+ 
+ 1. 만드는법
+ - PWA가 셋팅된 리액트 프로젝트 생성하기
+ => vs code 터미널에서 npx create-react-app my-app --template cra-temlate-pwa입력하여 작업 폴더 생성
+ 
+ - 기존프로젝트를 PWA로 만들려면? 
+ => 그냥 새 PWA 프로젝트 만들고 기존코드 복붙
+ - 물론 필요한 라이브러리도 설치
+ 
+ < PWA의 조건>
+ 1) manifest.json 있어야
+ 2) service-worker.js 있어야 // 오프라인에서도 사이트 열 수 있게 도와줌 (인터넷 안터져도 가능) 앱 구동에 필요한 모든 파일이 하드에 저장되기 때문
+ => 나는 html css js파일을 미리 하드에 저장해둘 것임, 사이트 접속할떄 html css js다운받지 말고 하드에 있는거 쓰셈~ : 캐싱 이라는 파일
+ aaset-manifest.json : 캐싱할 파일 목록
+ 
+ - 캐싱 하기 싫은 파일 있는 경우 
+ - nodemodule > react-script- config- webpack.config.js = InjectManifest 찾아서 exclude 부분에 파일 입력
+ 
+ => PWA로 만들어서 새로 만들필요 X 이미 만들어져 있음
+ index.js 가서 serviceWorkerRegistration.register();로 바꾸고 빌드
+ npm run build
+ 
+
+
