@@ -457,6 +457,10 @@ let user = createSlice({
   let 꺼낸거 = localStorage.getItem('data');
   console.log(JSON.parse(꺼낸거).name); //{name: 'kim'} Object
   
+  ** useEffect를 활용하면 처음에만 [], 재 접속시에는 데이터 유지되게 할 수 있음
+  => 나는 wathced의 length를 활용해 코드를 짰는데, 맨 처음에는 watch가 아예 없기때문에 null이 나옴!!주의!
+  
+  
   # 코드짜는 법을 모른다면
   1. 컴퓨터한데 아주 상세히 설명해줘야함 
   2. 방법 : 코드부터X 한글먼저 쓰고 코드로 옮기기
