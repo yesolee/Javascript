@@ -7,9 +7,9 @@ export default function Item(props) {
     <Col
       onClick={() => {
         navigate('/detail/' + props.cocktail.id);
-        let getWatched = JSON.parse(localStorage.getItem('watched'));
-        getWatched.unshift(props.cocktail.id);
-        localStorage.setItem('watched', JSON.stringify(getWatched));
+        let getwatched = JSON.parse(localStorage.getItem('watched'));
+        getwatched.unshift(props.cocktail.id);
+        localStorage.setItem('watched', JSON.stringify(getwatched));
       }}
     >
       <div width='1504px'>
