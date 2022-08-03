@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     let getwatched = JSON.parse(localStorage.getItem('watched'));
-    getwatched.length > 0
+    getwatched !== null
       ? localStorage.setItem('watched', JSON.stringify(getwatched))
       : localStorage.setItem('watched', JSON.stringify([]));
   }, []);
@@ -32,7 +32,6 @@ function App() {
     ['작명'],
     () =>
       axios.get('https://codingapple1.github.io/userdata.json').then((a) => {
-        console.log('요청됨');
         return a.data;
       }),
     { staleTime: 2000 }
@@ -44,7 +43,7 @@ function App() {
         <Container>
           <Navbar.Brand
             onClick={() => {
-              navigate('/');
+              navigate('/my-app');
             }}
           >
             Solar's bar
@@ -52,7 +51,7 @@ function App() {
           <Nav className='me-auto'>
             <Nav.Link
               onClick={() => {
-                navigate('/');
+                navigate('/my-app');
               }}
             >
               Home
@@ -68,14 +67,14 @@ function App() {
           <Nav className='ms-auto' style={{ color: 'white' }}>
             {result.isLoading && '로딩중'}
             {result.error && '에러남'}
-            {result.data && result.data.name}
+            {result.data && `접속자 : ${result.data.name}`}
           </Nav>
         </Container>
       </Navbar>
       <Suspense fallback={<div>로딩중임</div>}>
         <Routes>
           <Route
-            path='/'
+            path='/my-app'
             element={<Main cocktail={cocktail} setCocktail={setCocktail} />}
           />
           <Route
