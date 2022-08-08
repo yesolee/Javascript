@@ -601,5 +601,57 @@ const Cart = lazy(() => import('./pages/Cart.js'));
  index.js 가서 serviceWorkerRegistration.register();로 바꾸고 빌드
  npm run build
  
+# Node + Express 서버와 React 연동하려면
+
+1. 서버란? A좀 주세요하면 A보내주는 애
+- 리액트 연동? html주세요 -> react로 만든 html 보내기 
+
+2. 방법
+1) node.js 검색해서 설치
+2) 작업폴더 만들고 에디터로 오픈
+3) server.js만들고 코드 복붙
+const express = require('express');
+const app = express();
+const path = require('path');
+
+app.listen(8080, function () {
+  console.log('listening on 8080');
+});
+
+4) 에디터 터미너 열어서 
+- npm init -y 입력,
+- npm install express 입력
+
+5) react 프로젝트 생성
+
+6) react 프로젝트 빌드 npm run build
+- react는 개발 끝나면 build를 해야 html 파일이 나옴
+
+7) 누가 내 사이트 접속시 리액트로 만든 html보내주면 끝
+
+3. 여러 페이지 만들고 싶으면?
+- react-router로 /detail 등 만들 수 있음
+- http://localhost:8080/detail이라고 입력하면 react-router에게 보내느게 아니라 서버한테 요청하는 것임
+- 이를 방지하기 위해 하단에
+app.get('*', function (요청, 응답) {
+  응답.sendFile(path.join(__dirname, 'react-project/build/index.html'));
+});
+해놓으면 react-router가 처리해줌
+
+4. DB데이터 어떻게 리액트에서 보여줌 ? 
+ - DB에서 데이터html 뽑아서 글목록.html 파일에 꽂음 그html파일을 유저에 보냄 : html을 서버가 만들면 server-side rendering
+ - react방식은 react가 서버에 get요청으로 DB 데이터를 가져와서 그걸 html로 만들어서 보여주는 것 : html을 리액트(js)가만들면 client-side rendering
+ 
+ 예시) DB에 있던 상풍명을 보여주려면? 
+- 리액트파일에서 상품데이터 필요하면 /product로 GET요청하면 끝 => DB데이터 뽑아서 보내주는 API 작성, react는 여기로 get, post 요청(ajax사용)
+1) 상단에 이거 추가해놔야 ajax 잘됨
+app.use(express.json()); // 유저가 보낸 array/object 데이터를 출력해보기 위해 필요함
+var cors = require('cors'); //터미널에 npm install cors 입력해야 cors라이브러리 사용할 수 있음
+app.use(cors()); // 다른 도메인주소끼리 ajax 요청 주고받을 때 필요
+
+2) 하단에
+app.get('/product', function (요청, 응답) {
+  응답.json({name : 'black shoes'});
+});
 
 
