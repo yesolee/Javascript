@@ -21,3 +21,64 @@ git add app.txt app2.txt
 git log --online --all에 나오는 노란색 첫번째 단어 : 커밋 아이디
 git difftoll 커밋아이디1 커밋아이디2 : 특정 커밋 2개 비교 가능
 git difftool도 별로임 vscode extentions가 더 편함
+
+# branch
+1. 생성 : 터미널에서 "git branch 브랜치명"입력
+- 현재 커밋의 사본임
+2. 이동 : git switch coupon
+
+commit1 - commit 2
+          commit 2-1 :branch 생성
+          
+3. 지금까지 한 것들 보고싶으면 git log
+- 한 눈에 보기 쉽게 하려면 git log --oneline --all --graph
+- git log 나가고 싶으면 q버튼 
+
+4. coupon 브랜치 코드를 master(main) 브랜치에 합치고 싶다
+1) master 브랜치로 이동
+2) git merge coupon
+- 주의 :  같은 파일의 같은 줄을 수정하고 합치면 충돌이 일어남!
+3) conflict 해결법
+- 원하는 코드만 남기고(또는 vscode에서 선택) git add > git commit 
+
+5. 협업에서 사용 시 각자 브랜치 생성 후 코드를 수정하고 나중에 합쳐서 적용!
+
+# 다양한 merge 방법 
+
+1. 3-way-merge : 각 브랜치에 신규 commit이 있는 경우(수정된 메인 커밋과 수정된 브런치 커밋을 합쳐 새로운 커밋을 만드는 것)
+commit1 - commit 2 - commit3 ------
+          commit 2-1 commit 2-2----
+          
+2. fast-forward merge : 메인브랜치는 신규커밋이 없는 경우
+commit1 - commit 2
+          commit 2-1 commit 2-2(니 이름은 이제 main브랜치여) : 새로운 변경 내용은 이 브랜치에 다 있기 때문
+- 싫으면 git merge --no-ff 브랜치명 : 3-way merge해줌         
+
+3. 브랜치 삭제
+- merge 완료된 브랜치 삭제는 : git branch -d 브랜치명
+- merge 안한 브랜치 삭제는 : git branch -D 브랜치명
+
+4. rebase : 신규 브랜치의 시작점을 다른 커밋(최근 처밋)으로 옮길 수 있음 => 이후 fast-forward merge
+commit1 - commit 2 - commit3 
+                     commit 2-1 commit 2-2----
+이거를
+commit1 - commit 2 - commit3 - commit 2-1 commit 2-2 이렇게 깔끔하게 커밋할수있음 (git history 깔끔해보임)
+- 단점 : conflict 엔딩 많이 남
+- 사용법 : 
+1) 새로운 브랜치로 이동해서
+2) git rebase master(중심브랜치명) > 커밋 시작점 옮김
+3) master(중심브랜치명) 브랜치로 이동해서
+4) git merge 새로운 브랜치명
+
+5. squash and merger : git log를 깔끔하게 쓰고 싶을 때
+- 3-way merge하면 history 더러워짐
+- main branch git log 에 합쳐빈 branch의 잔챙이 commit 다 나옴
+- main branch log만 보고 싶으면 branch 선 끊어 놓음 => rebase 또는 squash 사용
+
+commit1 - commit 2 - commit3 - commit4(commit 2-1 commit 2-2 commit 3 다 합쳐서 메인에 새로운 커밋으로 뿅 바꿔줌) 선이 이어지지 X
+- git merge --squash 새브런치
+
+6. 적용 : 언제 어떻게?
+- 팀/회사의 branching/merge 가이드를 따라가면 됨
+- ex. 안중요한 브랜치는 squash
+- ex. feature/ develop 브랜치는 3-way merge..
