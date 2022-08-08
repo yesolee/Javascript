@@ -586,6 +586,14 @@ const Cart = lazy(() => import('./pages/Cart.js'));
  
  - 기존프로젝트를 PWA로 만들려면? 
  => 그냥 새 PWA 프로젝트 만들고 기존코드 복붙
+ *** index.js에 해당 내용 추가!!
+ <추가된것>
+ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+ 
+ // If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.unregister();
  - 물론 필요한 라이브러리도 설치
  
  < PWA의 조건>
