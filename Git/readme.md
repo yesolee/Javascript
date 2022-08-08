@@ -82,3 +82,22 @@ commit1 - commit 2 - commit3 - commit4(commit 2-1 commit 2-2 commit 3 다 합쳐
 - 팀/회사의 branching/merge 가이드를 따라가면 됨
 - ex. 안중요한 브랜치는 squash
 - ex. feature/ develop 브랜치는 3-way merge..
+
+
+# git revert, reset, restore
+1. 파일 복구하는 법
+2. git resotre c(파일 명)
+- c파일이 최근 커밋 상태로 돌아감
+- 특정 시점(git log의 커밋아이디)의 커밋 상태로 돌아가고 싶은 경우 git restore --source 커밋아이디 파일 명
+- git restore --staged c : staging취소도 가능 
+
+3. commit 취소하는 법
+- git 은 과거 조작 못함
+- 특정 커밋을 취소하는 커밋은 가능
+- git revert 커밋아이디1 커밋아이디2 2개도 가능 최근껀 HEAD
+- merge commit 도 취소 가능
+
+4. git reset --hard 커밋아이디
+** 해당 키워드는 협업시엔 사용 금지
+- (soft는 변동사항 지우지 말고 스테이징 할 수 있음)
+- mixed는 변동사항 지우지 말고 unstage해놓기
