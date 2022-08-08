@@ -101,3 +101,46 @@ commit1 - commit 2 - commit3 - commit4(commit 2-1 commit 2-2 commit 3 다 합쳐
 ** 해당 키워드는 협업시엔 사용 금지
 - (soft는 변동사항 지우지 말고 스테이징 할 수 있음)
 - mixed는 변동사항 지우지 말고 unstage해놓기
+
+# github
+- git 이 파일 기록해두는 장소 : repository 
+- 온라인 repository (원격저장소) 만들면 컴퓨터 고장나도 안심 / 협업가능
+
+1. git init : repository생성
+2. git branch -M main : master이름을 main으로 수정
+3. 파일 생성 -> git add -> git commit
+4. 로컬 ->  원격저장소 업로드
+- git push -u 원격저장소주소 올릴로컬브랜치명
+- git push -u https://github.com/yesolee/lesson.git main
+
+** git push
+- git remote add 변수명 저장할내용(주소같은거)
+- git remote -v : 변수 목록 확인
+-u : 방금 입력한 주소를 기억하라
+이후로는 git add git commit 후  git push 까지만 써도 됨
+
+# git clone
+- git clone 원격저장소주소
+- 팀원 github 아이디 등록해놔야 git push 가능
+- 다른 팀원이 최근 git push했으면 난 못함 ?? git pull (원격 저장소에 있는거 로컬저장소로 가져와주세요)주소
+- git pull 원격저장소(origin) 브랜치명 : merge conflict 발생 가능 
+- git fetch + git merge => git pull
+- git fetch : 원격저장소 신규 commit 가져오세요
+- git merge : 내 브랜치에 merge
+
+# 원격저장소에서 branch 만드는 법
+- 협업자 수가 많은 경우 push 등 하기 어려워 개발자마다 branch 만들어 개발하고 merge하는게 좋음
+- git push origin mining
+
+# git stash 코드 잠깐 보관하기
+- 최근 commit 과의 차이점으 전부 보관해줌 : git stash
+- staging 안해놓은 새로운 파일은 stash 안될수도
+- 메모도 적을 수 있음
+- git stash save 'ccc라고 적음'
+- -git stash list : 여태까지 임시저장한거 볼 수 있음
+- git stash pop : 가장 최근꺼 불러옴
+- 뭐하러 git stash 함? : 주석도 commit되기 떄문에 commit시 숨길때 유용함
+- git branch 만들어도 비슷함
+
+- 특정 stash 삭제 : git stash drop 번호
+- 모든 stash 삭제 : git stash clear
