@@ -56,7 +56,10 @@
 - npm 대체 : yarn
 
 # Get요청
-- .listen : 서버를 열어주세요
+- .listen : 원하는 포트에 서버를 열어주세요
+.listen(원하는 포트, function(){
+    서버 오픈시 실행할 코드
+})
 - 메세지 보내주기
 .get('/url', function(요청, 응답){
     응답. send('펫용품 쇼핑할 수 있는 페이지입니다.')
@@ -70,3 +73,28 @@ app.get('/', function (요청, 응답) {
   응답.sendFile(__dirname + '/index.html');
 });
  
+# 부트스트랩
+- Bootstrap v5는 IE 지원 X
+- Bootstrap v4는 IE11+
+- Bootstrap v3는 IE9+
+
+# 콜백함수
+- .get()함수 안에 function() = 콜백함수
+- 순차적으로 실행하고 싶을때 콜백함수 사용
+- /beauty로 접속을 하면=> function() 해주세요~
+- 콜백함수 안에 2가지 파라미터 가능
+- .get('경로',(요청내용, 응답할방법)=>{}) 이렇게 써도 됨
+
+# <form> 태그 기능 개발
+- 꼭 있어야 하는 2개 속성 : action(/"add" : POST 요청할 경로), method("POST" : GET이냐 POST냐 => 관습적으로 POST씀)
+- .post('/add', function(요청, 응답){
+    응답.send('전송완료')
+    })
+    * submit 한 정보는 어디로 ?? => 요청에 들어감 !! 근데 쉽게 꺼내쓰려면 라이브러리 필요 : npm install body-parser
+    
+- POST 요청으로 서버에 데이터 전송하고 싶으면
+    1. body-parser 필요
+    2. input들에 name ="이름작명" 쓰기 (서버에서 input을 구분하기 위함)
+    
+    
+-  
