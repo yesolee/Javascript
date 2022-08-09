@@ -52,6 +52,9 @@
 - 엔트리 포인트만 내가 원하는 파일 명으로(ex. server.js)
 - npm install express
 
+- node_modules : 라이브러리에 필요한 파일들을 담는 공간
+- npm 대체 : yarn
+
 # Get요청
 - .listen : 서버를 열어주세요
 - 메세지 보내주기
