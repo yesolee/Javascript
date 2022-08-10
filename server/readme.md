@@ -126,3 +126,25 @@ app.get('/', function (요청, 응답) {
     5) Layered System
     6) Code on Demand
     
+   # 웹사이트 기능만들기
+    1. 서버로 데이터 전송할 수 있는 UI만들고
+    2. 서버에서 원하는대로 정보를 처리해주면 됨
+
+   # DB 
+   1. DB종류
+     1) 관계형 : 가로, 세로 칸이 나눠져있음 => 3차원 X
+    ex. MySQL, MariaDB, Oracle, MS SQL Server
+    - 대부분 SQL 이라는 언어 써야함
+     2) NoSQL : Object 자료형으로 입출력 가능
+    ex. MongoDB
+    
+  2. MongoDB 무료 호스팅 (512MB)
+    - database(폴더) > collection(파일)
+    
+  3. 서버에서 가져온 할일 리스트 HTML 파일 만들기
+    => EJS 라이브러리 설치 : npm install ejs
+    => EJS 쓰면 html안에다가 서버데이터를 넣을 수 있음 : 대체품 React!!
+    => views 폴더 생성 후 ejs파일 폴더에 넣기
+    server.js에 app.set('view engine', 'ejs'); 해줘야 node.js가 ejs파일 렌더링 가능
+    
+    
