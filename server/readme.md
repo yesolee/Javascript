@@ -148,3 +148,34 @@ app.get('/', function (요청, 응답) {
     server.js에 app.set('view engine', 'ejs'); 해줘야 node.js가 ejs파일 렌더링 가능
     
     
+  4. var, let, const
+  - var : 재선언O, 재할당O, 생존범위는 function
+  - let : 재선언X, 재할당O, 생존범위는 {}
+  - const : 재선언X, 재할당X, 생존범위는 {}
+ 
+ 5. DB 수정
+ - db.collection('counter').updateOne({어떤데이터를 수정할지},{??: {수정값}},function(){}) // function은 없어도 됨.
+ // 여러개 한번에 수정 => updateMany
+ // 수정값은 opertator ($set(변경), $inc(기존값에 변경) 등등..)
+ 
+ 6. HTML은 GET, POST만 가능
+ => DELETE요청하는법 
+ 1) method-override 라이브러리 이용 (Node에서 쓸 수 있는)
+ 2) JavaScript AJAX를 이용
+ 
+ *** 서버는 꼭 뭔가 응답해줘야함
+ - 2XX : 성공
+ - 4XX : 실패
+ 실패 staus 코드를 보내자
+ - 5XX : 서버문제로 실패
+ 
+ # AJAX란?
+ - 새로고침 없이 서버에 요청하는걸 도와주는 JS문법
+
+- ( : ) : url Parameter //detail/어쩌구로 get요청을 하면~
+app.get('/detail/:id', function (요청, 응답) {
+  db.collection('post').findOne({ _id: 요청.params.id }, function (에러, 결과) {
+    console.log(결과);
+    응답.render('detail.ejs', { 이런이름으로: 이런데이터를 }); //ejs파일로 데이터를 보내는 방법
+  });
+});
