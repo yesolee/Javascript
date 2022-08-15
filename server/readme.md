@@ -183,3 +183,14 @@ app.get('/detail/:id', function (요청, 응답) {
 # ejs문법
 - <%= %> : 변수
 - <%- %> : 자바스크립트 문법
+
+# npm install method-override 
+1. <HTML> form 태그는 GET/POST만 가능
+- PUT, DELETE 위해 method-override 라이브러리 사용
+- server.js 파일 상단
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
+- edit.js 파일
+<form action="/경로?_method=PUT" method="POST">
+
+** 서버에서 응답은 필수!! 
