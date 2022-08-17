@@ -228,3 +228,41 @@ lucene.korean 설정해주면 글쓰기를로 검색해도 글쓰기로 검색�
     - DB에 작성자 이름 등등 저장 ? => objectId만 알면 컬렉션 조회 가능해서 필요없음, 하지만 Nosql은 부가정보도 게시물이랑 함꼐 거장해서 collection 뒤질 필요 없게하는게 좋음
       (DB읽고 쓰는데 돈들기두함)
     
+# 저장 못해서 날아감.. 내일 다시 해야지
+- router 쪼개기
+```routes 폴더 만들고 shop.js파일 생성
+var router = require('express').Router();
+
+// 미들웨어 만들기
+function 로그인했니(요청, 응답, next) {
+  if (요청.user) {
+    // 로그인 후 세션이 있으면 요청.user가 항상 있음
+    next();
+  } else {
+    응답.send('로그인안하셨는데요?');
+  }
+}
+// 여기있는 모든 라우터(URL)에 미들웨어 적용
+//router.use(로그인했니);
+// '/shirts' 세부 라우트로 접속할떄만 미들웨어 적용
+router.use('/shirts', 로그인했니);
+
+router.get('/shirts', function (요청, 응답) {
+  응답.send('셔츠 파는 페이지입니다.');
+});
+
+router.get('/pants', function (요청, 응답) {
+  응답.send('바지 파는 페이지입니다.');
+});
+
+module.exports = router;
+```
+
+```server.js 파일에 해당 내용 추가
+
+// 전역 미들웨어 (모든 요청과 응답 사이에 쓰겠다)
+app.use('/shop', require('./routes/shop.js'));
+app.use('/board/sub', require('./routes/board.js'));
+// '/'로 접속한 사람은 이 미들웨어(방금만든 라우터)를 적용해주세요
+
+```
