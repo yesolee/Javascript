@@ -328,3 +328,50 @@ role : "관리자"
 2) 메세지 남기기
 댓글도 그냥 게시물 발행임
 -document1개는 글자 16M까지 가능
+
+
+# ajax 요청문 사용 버전
+``` 버전1
+     $('.delete').click(function(e){
+        var 글번호 = e.target.dataset.id; // e.target 지금 클릭한것
+        var 지금누른거 = $(this); // this 지금 이벤트 동작하는 곳
+        $.ajax({
+        method : 'DELETE',
+        url : '/delete',
+        data : {_id : 글번호}
+      }).done(function(결과){ // 요청이 성공하면 function을 실행해주세요~
+        // 페이지를 강제로 새로고침 해주세요
+        // 삭제 버튼을 누른 <li> 요소를 제거/안보이게 해주세요
+          console.log('성공했어염')
+          지금누른거.parent('li').fadeOut();
+        }).fail(function(xhr, textStatus, errorThrown){
+          //요청이 실패시 실행할 코드
+          console.log(xhr, textStatus, errorThrown);
+        }) 
+      })
+```
+
+```버전2
+    $('.chat').click(function(e){
+      var _id = e.target.dataset.id;
+      $.post('/chatroom', {당한사람id:_id}).then(()=>{
+        console.log('성공')
+      })
+    });
+```
+축약해서 사용 가능
+
+# insertOne 버전
+```
+insertOne({}, 여기 콜백함수 써도 되고 )
+insertOne({}).then(여기 콜백함수 써도 됨)
+```
+
+```
+  db.collection('chatroom')
+    .insertOne(저장할거)
+    .then((결과) => {
+      응답.send('성공');
+    });
+    
+```
