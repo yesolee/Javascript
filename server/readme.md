@@ -375,3 +375,15 @@ insertOne({}).then(여기 콜백함수 써도 됨)
     });
     
 ```
+
+# post 요청
+- data-id에 array가 담기지 않아 Jquery를 이용해 다른 input 태그의 value값을 원하는 값을 넣고 display :none으로 설정했다.
+display로 변경하면 원하는 값이 input안에 담겨 있는게 보이지만, 출력해보면 해당 태그의 val()은 항상 1이 나온다
+뭐가 문제일까..
+
+해결 ! data-id를 1개만 지정가능한 줄 알았으나 data-작명 을 통해 한번에 여러 값을 전송할 수 있다.
+```
+<button class="chat" data-id="<%= posts[i].작성자 %>" data-post-id="<%= posts[i]._id %>" onclick="location.href='/chat/<%= posts[i]._id %>'">채팅하기</button>
+      var _id = e.target.dataset.id;
+      var post_id =  e.target.dataset.postId; //-는 카멜케이스로 꺼내올 수 있음!! 
+ ```
