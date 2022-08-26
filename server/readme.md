@@ -443,3 +443,18 @@ new EventSource('/경로'); // 실시간 데이터 받기 위한 GET요청
 ```
 
 * 게시글 당 1개의 채티룸 설정 완료
+
+# MongoDB Change Stream 
+- 실시간 DB가 업데이트 되면 유저에게 쏴주세요 기능 
+- DB변동시 -> 서버에 알려줌 -> 유저에게 보낼 수 있음
+
+``` server.ejs
+    const pipeline = [
+      {$match : {'fullDocumnet.parent':요청.params.id}}
+    ];
+    const collection = db.collection('message');
+    const chageStream = collection.watch(pipeline); // .watch()붙이면 실시간 감시해줌
+    chageStream.on('change', ()=>{
+    });
+
+```
