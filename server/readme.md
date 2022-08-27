@@ -450,7 +450,7 @@ new EventSource('/경로'); // 실시간 데이터 받기 위한 GET요청
 
 ``` server.ejs
     const pipeline = [
-      {$match : {'fullDocumnet.parent':요청.params.id}}
+      {$match : {'fullDocument.parent':요청.params.id}}
     ];
     const collection = db.collection('message');
     const chageStream = collection.watch(pipeline); // .watch()붙이면 실시간 감시해줌
@@ -458,3 +458,44 @@ new EventSource('/경로'); // 실시간 데이터 받기 위한 GET요청
     });
 
 ```
+
+# 내 대화는 노란색으로
+- user._id가 채팅작성자 id와 같으면 class를 chat-mine, 다르면 chat-writer로 수정
+
+# SSE말고 WebSocket(실시간 소통 채널) 서버, 유저간 실시간 통신 가능
+- SSE : 서버가 유저에게 일방적으로 데이터 쏴줌
+- WebSocket 양방향 통신 가능 : 브라우저 호환성을 위해 socket.io라이브러리 써서 더 간편하게 해보자
+=> 단톡방만들기
+```server.js
+const app = express(); 이거 밑에
+
+const http = require('http').createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(http);
+
+하단에 app.listen 부분을 http.listen으로
+* nodejs는 http.listen 근데 express 라이브러리 쓸려면 app.listen 
+근데 결국는 똑같은 기능임
+```
+
+```유저가 보는 html파일에도 socket.io 세팅해야함
+socket.io cdn 검색 후 JS파일을 socket.ejs에 script 태그 복붙
+** 주의 npm install socket.io 의 버전과 동일해야함 //package.json확인
+
+<script>
+// 유저가 WebSocket에 접속하는법
+var socket = io();       
+// 서버에게 웹소켓으로 실시간 메세지 보내는 법
+$('send').click(function(){
+ socket.emit('작명','메세지')
+})
+<script>
+
+```server.js 
+서버가 수신하려면 socket.on(작명, 콜백함수)
+ 누가 'user-send'이름으로 메세지 보내면 내부코드 실행해주셈
+  socket.on('user-send', function(data){
+    console.log(data);
+  })
+  ```
+
