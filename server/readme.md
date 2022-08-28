@@ -540,4 +540,12 @@ server : socket.on('joinroom', function(){
     
     
     # 배포 완료!
-    https://todoapp-359714.du.r.appspot.com/
+    https://todoapp-359714.du.r.appspot.com
+    
+    # 채팅이 안되는 에러 갈생
+    google cloud는 스케일링이 자동이라 여러 컴퓨터로 get post 분산처리를 해줘서 인증이 풀린걸수도 ? 
+    => 세션을 DB에 저장하거나 https://github.com/googleapis/nodejs-datastore-session 사용
+    
+    => npm install @google-cloud/connect-datastore
+    
+    
