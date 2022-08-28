@@ -498,4 +498,26 @@ $('send').click(function(){
     console.log(data);
   })
   ```
-
+  
+  # 서버-> 유저 메세지 전송
+ 1.
+  io.emit() -> server.js
+  메신저 수신은 언제나 socket.on() -> socket.ejs
+  
+  => io.emit : 이 사이트 접속한 모두한테 방송해라 : broadcast한다
+  => 단톡방 만들때 쓰면 됨
+  
+2. 서버- 유저1명간 단독으로 소통하고 싶은 경우
+접속시 자동 발급되는 socket.id사용
+  socket.on('user-send', function (data) {
+    io.to(socket.id).emit('broadcast', data);
+  }); //자기한테
+  
+3. 채팅방 만들고 입장은
+  socket.join(방이름);
+  
+html에서 서버에 요청할때 socket으로 GET/POST 요청 대체 가능
+html : socket.emit(작명,메세지)
+server : socket.on('joinroom', function(){
+    socket.join('room1');
+}) // 서버는 joinroom 이름의 메세지 받으면 채팅방 넣어줌
