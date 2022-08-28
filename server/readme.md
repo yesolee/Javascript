@@ -521,3 +521,19 @@ html : socket.emit(작명,메세지)
 server : socket.on('joinroom', function(){
     socket.join('room1');
 }) // 서버는 joinroom 이름의 메세지 받으면 채팅방 넣어줌
+
+    
+# 리액트에서 DB쓰는 법
+
+```server.js
+    app.use(express.json());
+    var cors = require('cors');
+    app.use(cors());
+    
+    밑에 api작성
+    
+   app.get('/product', function(요청, 응답){
+    응답.json({name : 'black shoes'}) // 응답.json( array혹은 object )
+    })
+
+```
