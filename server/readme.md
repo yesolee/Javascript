@@ -547,5 +547,8 @@ server : socket.on('joinroom', function(){
     => 세션을 DB에 저장하거나 https://github.com/googleapis/nodejs-datastore-session 사용
     
     => npm install @google-cloud/connect-datastore
+    https://console.cloud.google.com/iam-admin/serviceaccounts/details/100528899053365016647/keys?hl=ko&project=todoapp-359714&supportedpurview=project
+    사용자계정을 생성하고 projectID와 key파일경로를 환경변수 파일에 저장했는데 되지 않는다
     
+    google-library말고 DB에 저장하는 방법을 다시 찾아봐야겠다.
     
