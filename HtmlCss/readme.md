@@ -55,3 +55,14 @@
 - 태그는 태그명(tag selector)
 => 여러개 스타일 겹칠 경우!? 우선순위에 따라 적용! ***
 - style="" >>> id(#) >> class(.) > tag 
+
+3. 웹레이아웃의 기초 : div를 이용한 박스 디자인
+- <div></div> : division 화면을 분할하겠습니다.
+- margin : 상하좌우 여백
+- padding : 상하좌우 안쪽 여백 을 채운 후에 글자를 채워라
+
+4. inherit(자식태그에 상속) 지원하는 스타일
+- font-size
+- font-family(글씨체)
+- color ..
+
