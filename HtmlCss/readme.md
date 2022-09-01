@@ -66,3 +66,30 @@
 - font-family(글씨체)
 - color ..
 
+# 레이아웃 만들기 - 박스를 가로배치하기
+
+(1) float
+
+* 감싸는 container/wrapper 박스 만들어두면 유용한
+- 전체 width를 정하는 역할
+- div는 display : block 가로행 다 차지함
+- float : left 요소를 붕 띄워서 왼쪽 정렬 => 붕띄워서 다음 요소 추가하면 float한거 무시하고 처음에쓴거 바로 다음 순서에 옴
+- clear : both => float 다음에 오는 요소에게 주면 float으로 발생하는 이상한 현상 해결 가능
+=> float쓴 다음에 clear해주는게 좋음
+
+(2) display : inline-block 내 크기만큼 차지 => 박스사이 공백을 제거해야함 (엔터키치면X)
+* 공백제거방법
+1) div 사이에 주석달기<!--여기서엔터
+-->
+2) 부모태그에 font-size:0px
+: 부모 태그로부터 inherit되는 스타일은 중요도 가장 낮음
+=> font쓰고싶으면 자식태그에서 style="font-size : 20px"처럼 스타일주면 됨
+=> 근데 그럼 이상해짐 : vertical-align: top;쓰면 해결됨 // inline요소에 적용
+=> baseline이 옆에 존재하면(옆에 글자가 있으면) display: inline-block 요소들이 baseline위에오려고함 
+
+** inline 사용 시 주의사항
+- 자기 크기만큼 자리 차지함
+- 공백제거 필요
+- 주변에 글이 있으면 가끔 이상해짐
+
+
