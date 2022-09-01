@@ -5,8 +5,8 @@
 - 자료들이 어디에 어떻게 배치되었는지 "구조를 표현"하기 위한 언어
 
 # 태그
-- <h1></h1> : 제목 heading 1~6
-- <p></p> : paragraph 본문
+- <h1></h1> : 제목 heading 1~6 / display: block / 기본 margin이 있음
+- <p></p> : paragraph 본문 / display: block / 기본 margin이 있음
 - <image src="이미지경로"> : image
 - <a href="주소"></a> : 링크
 - <button></button>
@@ -91,5 +91,35 @@
 - 자기 크기만큼 자리 차지함
 - 공백제거 필요
 - 주변에 글이 있으면 가끔 이상해짐
+  
+** 박스부터 배치하고 내용 채우기 시작하면 쉬움
 
+* class 이름 작명할 땐 의미전달도 중요함
 
+# float 관련 문제
+  - margin이 안먹힘
+  - <div>사이에 <div style="clear : both"></div>를 넣어줌
+  - float준 요소 다음에 이런 가상의 박스 넣어주는걸 추천
+  
+# nav
+  - div : 박스만들때 씀
+  => 한번에 어떤 기능인지 알기 위해 다른이름으로 쓸수있음
+  - nav : 네비게이션 만들때 div대신 쓸수있음
+  - section
+  - footer
+  
+  * selector 문법
+  1) 공백 : ~안에 있는 모든자식
+  2) > : ~안에있는 직계자식 => 자식의자식은 안바뀜
+  * 주의
+  .container div>div>p>span {
+    color : red; //비추천
+  }
+  
+  p쯤에 class정해서 p class명 span { 
+    딱 읽었을때 어디에 쓰는지 잘보여서 더 좋음
+  }
+  
+* background-repeat : no-repeat 공간남으면 반복되는거 막아줌  
+* cover : 배경짤려도 상관없으니 빈공간없이 배경으로 꽉 채워라
+  
