@@ -223,3 +223,32 @@ class="w-100 h-80"
 
 * 버튼 오른쪽 정렬 간단히 하는법
 - display:block; margin-left:auto
+
+# 표만들기
+- 장바구니같은거 만들떄 씀
+- table태그 쓰기
+- 가로 행 tr
+- 세로 열 td
+** tr부터만들고 td만들어야함
+- 제목용 세로 열 만들때(글씨 굵게) th
+
+** 제목 thead, tbody
+- table은 기본적으로 틈이 존재
+table {
+  border-collapse: collapse;
+}
+
+** 셀안에 내용 정렬 (세로정렬) style="vertical-align: middle/top/bottom"
+- 용도1) inline (폭과 너비가 없는 요소, 항상 옆으로 채워짐)
+ex. 대표적인 inline요소 span 
+/inline-block요소 간의 세로정렬할 때 vertical-align 씀
+=> 위첨자(super) 처럼 정렬도 가능해짐, 아래첨자sub
+- 용도2) table안에서 세로정열할때 사용 (top/middle/bottom)만 가능
+
+** 일반 div로 표 만들기 display:table
+    <div style="display: table">
+      <div style="display: table-row">
+        <div style="display: table-cell">21</div>
+        <div style="display: table-cell">23</div>
+      </div>
+    </div>
