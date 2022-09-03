@@ -252,3 +252,12 @@ ex. 대표적인 inline요소 span
         <div style="display: table-cell">23</div>
       </div>
     </div>
+
+  ** td 폭 조정시 유의사항
+ - td에게는 최대한 이만큼 차지해보세요(다른셀에 영향을 주지 않는만큼)~ 라는 max-width와 유사한 의미(글자 보이는 최소폭이 있기 때문에)
+ - 표는 맨위에 폭만 조저래도 아래 표는 자동으로 늘어남
+ - nth-child()셀렉터 ***
+  
+  .cart-table th:nth-child(2) { //두번째 th요소를 설정해라
+    n번째 등장하는 요소만 스타일링 할때 클래스명 안만들어도 되서 편리함
+  }
