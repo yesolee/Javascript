@@ -185,4 +185,41 @@ body {
 => 호환성 이슈 해결책부터 CSS파일 맨위에 첨부 reset, normalize.css
 or html에 link태그 첨부
 
+# form
+* input
+- input name="인풋이름" (서버개발할때 사용)
 
+* select
+- option
+
+* textarea rows="크기세팅가능" 인풋 크기 조정가능
+
+** 버튼 만드는법 2가지
+1. input type="submit"
+2. button type="submit"
+
+
+# selector 문법 : 
+1) 타입이 텍스트인 인풋만 스타일링 할 수 있음
+input[type(속성명)='text'(속성값)] {
+  타입이 텍스트인 인풋만 스타일링 할 수 있음
+}
+
+2) 콤마로 여러개 선택 가능
+-div,input,textarea {
+  box-sizing: border-box;
+}
+
+# css 쓰는 꿀팁
+1) 초보들은 그때그때 class 새로 만들어서 씀
+2) 고수들은 기존에 있던 클래스(ex. w-100)명 재사용
+=> 어떻게 class만들어야 재사용이 가능할지 고민하기!
+3) 기존에 있던 클래스에 추가 스타일링(ex.h-80)이 필요할 경우 class2개쓰기
+class="w-100 h-80"
+
+# label태그
+- input쓸때 같이 쓰는 태그 for="sub" 속성 넣어줌 input에는id="sub"
+=> 라벨 누르면 인풋도 누른것처럼 동작
+
+* 버튼 오른쪽 정렬 간단히 하는법
+- display:block; margin-left:auto
