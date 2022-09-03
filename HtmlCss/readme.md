@@ -119,7 +119,70 @@
   p쯤에 class정해서 p class명 span { 
     딱 읽었을때 어디에 쓰는지 잘보여서 더 좋음
   }
-  
+
+# background
+
+* background-image: url(/cat.jfif), url(); url 2개 이상 넣으면 그림이 겹쳐짐 => ex. 투명도를 지원하는 png 이미지 사용
+* bacground-size : 
+1) cover : 배경짤려도 상관없으니 빈공간없이 배경으로 꽉 채워라
+2) contain : 배경짤리면 안됩니다.  
 * background-repeat : no-repeat 공간남으면 반복되는거 막아줌  
-* cover : 배경짤려도 상관없으니 빈공간없이 배경으로 꽉 채워라
-  
+* background-position: center; 가운데부터 그림 나옴
+* filter brightness(70%): 박스에 보정 입히기 => 이미지 위에 글씨쓸때 이미지 어둡게해서 그 위에 쓴다던지 함
+- 안에 글씨 있으면 글씨에도 필터 입혀짐=>이미지에만 따로 쓰는게 좋음
+- 옛날버전 tint 주는법 : 
+background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url();
+* background-attachment : fixed; 웹사이트가 스크롤되도 이미지 고정
+
+*** margin collapese현상
+- 박스(div) 2개일 경우 위쪽 테두리가 겹침(큰네모안에 작은네모 or 큰네모 바로 밑에 작은 네모) => marine도 합쳐짐 (큰걸 우선적으로 적용시킴)
+=> 해결법 : 테두리를 안붙게 하면 됨 ex. 패딩주기
+
+*** body 태그는 기본 마진이 있음. 처음에 body에 margin:0px 해놓기
+
+# class명 중복을 피하는 방법
+- 접두어를 활용 ex. button => main-button
+
+# position(기준점 잡기)
+1) 좌표 이동 가능
+- position : 
+* relative; 내 원래 위치를 기준으로 이동하세요
+*absolute 내 부모 태그가 기준 => 대신 부모태그에 position:relative써줘야함
+- 가운데 정렬로 absolute하고 싶으면
+left: 0; right :0; margin:auto; width : 원하는 요소 크기 (안적으면 가로 행 다 차지함)
+* static; 기준이 없음 좌표적용 불가X, 
+* fixed; 현재화면이 기준 (viewport)
+- top : 100px; 이런식으로 position을 줘야 함
+2) 공중에 뜸
+=> 글 다음에 position부여한 버튼이 있으면 공중에 뜨기때문에 길이 아무리 길어져도 원하는 위치에 계속 있을 수 있음
+
+# z-index
+- 공중에 떠있는 애들이 많으면..
+누가 맨 앞에 올것임? => z-index 사용-
+- 정수 사용, 높을수록 앞에옴
+
+# max-width
+- width : 80% // 부모요소 크기의 80%
+- 반응형 웹페이지 만들고 싶으면 % 사용
+- PC사이즈에서 너무큼 => max-width 사용
+
+*** width는 content 영역의 너비를 의미함
+=> 패딩, 보더 등은 width랑 상관없음
+=> 패딩이 크면 박스도 커짐
+=> 해결법 : width를 패딩과 보더 포함해라
+box-sizing : border-box;
+기본은 content-box임
+
+** css파일 맨 위에
+div {
+  box-sizing: border-box;
+}
+body {
+  margin : 0px;
+}
+
+브라우저마다 기본 디자인이 다르게 보일 수 있음 
+=> 호환성 이슈 해결책부터 CSS파일 맨위에 첨부 reset, normalize.css
+or html에 link태그 첨부
+
+
