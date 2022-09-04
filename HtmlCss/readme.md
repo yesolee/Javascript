@@ -261,3 +261,71 @@ ex. 대표적인 inline요소 span
   .cart-table th:nth-child(2) { //두번째 th요소를 설정해라
     n번째 등장하는 요소만 스타일링 할때 클래스명 안만들어도 되서 편리함
   }
+  
+  # pseudo-class
+  
+  * :hover 마우스 올릴때 스타일
+  * :focus 커서찍혀있을때 스타일
+  * :active 클릭할때 스타일
+넣을 땐 순서가 중요함 (기억안나면 hofa로 외우기)
+  * :link 클릭 전 스타일
+  * :visited 클릭 후 스타일
+  
+  
+ # 코드양이 줄어드는 class 작명법 (OOCSS, BEM)
+  
+  (1) OOCSS 
+  
+  - 중복을 피하기 => 살 발라내기
+  ex. 뼈대 class1개 + 특징 1개 
+  
+  - 장점 : css양이 줄어든다, 유지보수 편리함 =>OOCSS
+  Object Oriented CSS
+  - 단점 : html이 더러워짐
+  
+  - Utility class : 스타일 한두개만 들어있는 class
+  ex. 부트스트랩 같이 쓰는거
+  ex. 폰트사이즈 미리 정해둠
+  .f-samll / f-mid / f-large
+  
+``` HTML
+      <button class="main-btn bg-red f-lg">더알아보기</button>
+      <button class="main-btn bg-blue">구매하기</button>
+```
+```  css
+.f-lg {
+  font-size: 20px;
+}  
+  
+.main-btn {
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.bg-red {
+  background: red;
+}
+
+.bg-blue {
+  background: blue;
+}
+```
+ 
+  (2) class 작명할때 창의력이 딸리면 BEM
+  Block_Element--Modifier
+  
+  -class 덩어리 이름__역할--세부특징
+  -div class="profile"
+    -img class="profile__img"
+    -h4 class="profile__title"
+    -p class="profile__content"
+    -button class="profile__button--red
+    -button class="profile__button--blue
+  
+  근데 이건 button class 2개 만들어야 하니까 OOCSS랑 합쳐서
+  - button class="profile__button bg-red"
+  - button class="profile__button bg-blue" 로 하는게 좋아보임
+  
+  *** 근데 React, Vue쓰면 덩어리(Component) 단위로 HTML 파일 나눠서 코드 짜기 때문에 Component에만 사용 가능한 CSS 생성 가능
+  => 각 component끼리 똑같은 클래스명 사용 가능 (각각 만들기 때문에)
