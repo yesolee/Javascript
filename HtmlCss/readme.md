@@ -329,3 +329,162 @@ ex. 대표적인 inline요소 span
   
   *** 근데 React, Vue쓰면 덩어리(Component) 단위로 HTML 파일 나눠서 코드 짜기 때문에 Component에만 사용 가능한 CSS 생성 가능
   => 각 component끼리 똑같은 클래스명 사용 가능 (각각 만들기 때문에)
+  
+  
+  # 폰트 설정
+  - font family : 'a글씨체' , '안되면 b글씨체', '이것도안되면 이거로해주세요c'
+  // 페이지 사용하는 유저의 컴퓨터에 해당 폰트가 있어야함
+  // 한글은 용량이 커서 가능하면 woff 파일을 사용 (ttf의 1/3수준)
+  => 1~2개만 씁시다
+  
+  // 내가 준비한 폰트파일을 css에서 사용가능하게 등록
+  @font-face {
+  font-family: '이쁜폰트';
+  src: url(../font/NanumSquareR.woff);
+}
+  .body {
+  margin: 0;
+  font-family: '이쁜폰트';
+}
+
+** 폰트 부드럽게 처리하려면 회전시키기
+p,
+h4,
+h3,
+span,
+button {
+  transform: rotate(0.03deg);
+}
+
+# flex
+- inline, table과 비슷한 속성
+- width: 600px; 일 경우 최대한 맞춰주세요~ (꼭 600px아닐 수 있음)
+- 가로정렬 : justify-content: (flex-start/center/flex-end)
+- 세로배치 : flex-direction: column;
+- width크면 밑으로 보내고 싶을 떄 flex-wrap:wrap
+- 상하정렬 : align-items (flex-start/center/flex-end)
+* align-content : 박스가 여줄일때 박스들의 상하정렬
+(space-between, space-around) 포함
+- 박스크기를 비율로 설정 가능 flex-grow:2 // 다른 요소에 비해 2배큼(최대한, 정확이2배는 아님)
+
+# Emmet 기능 활용
+- div.container>div 엔터 (.class명 css셀렉터 문법)
+=>  <div class="container">
+      <div></div>
+    </div>
+
+- div#header>p.title*3 (#id명 css셀렉터 문법)
+      <div id="header">
+        <p class="title"></p>
+        <p class="title"></p>
+        <p class="title"></p>
+      </div>
+      
+ - lorem 엔터 => 임시글자 무작위 생성
+ 
+ *** 연습하기
+ 1) div 몇개 필요할 지 전체적인 구조 생각
+ 2) 여기 글은 p태그로 쓸지 h1으로 쓸지 먼저 생각
+ 3) 클래스명은 뭘로 할지 미리 생각
+ 4) 그다음에 스타일 입히기
+ 
+ - color : #까지만 입력하면 내가 위에서 사용한 색상 힌트 보여줌
+ 
+ # head 태그 안에 들어가는 태그들
+ 1) link (css파일) 태그
+  <link href="css/main.css" rel="stylesheet">
+  ** 경로
+  - css/main.css : 현재 html과 같은 경로에 있는 css라는 폴더 내의 main.css파일 => 상대경로
+  - /css/main.css : 현재 사이트의 메인 경로 (yesolee.github.io)경로에 /css/main.css를 추가 => 절대경로
+  
+  2) style(css) 태그
+  - html 파일안의 코드는 위에서부터 읽으므로 body태그 맨 밑에 두면 사이트 로딩 시 스타일이 잠깐 깨질 수 있어 head에 넣음
+  
+  3) title 태그
+  - 사이트 제목 (탭에 뜨는 이름)
+  
+  4) 여러가지 meta태그
+  - 사이트의 인코딩 형식 charset="UTF-8"
+  - 사이트 검색 결과 화면에 뜨는 글귀 수정
+ * name="description"(구글검색시 팦란 제목으로 뜨는 글귀) content="어쩌구"
+  * name="keywords" 검색에 도움을 주는 키워드 등 "content"="HTML,CSS,코딩"
+  - 사이트 초기 zoom 레벨이나 폭 지정
+  * name="viewport" , content="width=device-width"//모바일 기기의 실제 폭으로 렌더링 해주세요
+  content=",initial-scale=1" // 접속시의 화면 줌레벨 설정
+  => 반응형 웹 만들때 쓰는 meta 태그
+  ```HTML
+  <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  ```
+  
+  5) open graph
+  - 이미지 박스안에 사이트 설명, 제목, 이미지가 뜨는데 이걸 커스터마이징 하고 싶을때 사용
+  ```HTML
+  <head>
+  <meta property="og:image" content="/이미지경로.jpg">
+  <meta property="og:description" content="사이트설명">
+  <meta property="og:title" content="사이트제목">
+</head>
+
+6 Favicon
+- 웹사이트 옆에 뜨는 아이콘
+- ico 혹은 png파일
+- 32*32 사이즈
+- 바로가기 추가 아이콘
+rel="apple-touch-icon-precomposed"  
+- OS 호환 : favicon generator
+
+  ```
+  <head>
+  <link rel="icon" href="아이콘경로.ico" type="image/x-icon">
+</head>
+  ```
+  
+  
+  # 반응형 웹페이지
+  - 화면사이즈가 작으면 스타일을 변경해주세요~
+  
+  ** 사이즈
+  - vw : viewport width 브라우저 폭에 비례
+  - vh : 브라우저 높이에 비례
+  - rem : 기본 폰트 사이즈에 비례 (HTML 16px의 10배 10rem = 160px)
+  => 쓰는 이유 : 옛날 브라우저는 설정에 들어가서 font-size옵션에서 수정함
+  => layout이 깨질 수 있음
+  => 모든 곳을 rem으로 크기 지정하면 기본 font-size 커져도 모든게 같이 커짐
+  => 요즘은 ctrl 마우스 하면 다같이 커져서 안씀
+  => 요즘은 typography 디자인할때 px 외우기 귀찮을때 씀
+  
+  - em 내 폰트 사이즈의 n배
+
+# media query => 항상 멘 밑에 있어야 잘 작동!
+
+@media screen and (max-width: 1200px) { // 1200px 이하에 밑에꺼 적용해주세요
+  .main-title {
+    font-size: 30px;
+  }
+  .nav-menu {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .nav-menu {
+    font-size: 10px; // 768px 이하면 이거 추가해주세요 => css는 밑에 줄에 있는거 우선 적용
+  }
+}
+
+=> 큰사이즈 -> 작은사이즈 순으로 작성
+=> 다른 사람이 많이 쓰는 breakpoint 기준 px값을 따라하는 것을 권장
+- 1200px : 태블릿 디자인
+- 992px : 
+- 768px : 모바일
+- 576px : 
+=> 어디서 넣을지는 정하기 나름 (4개 넘어가면 복잡하니까 3개정도로 만족하기)
+
+- screen 모니터 print 프린터화면 (프린트는 생략가능)
+
+* 숙제 : PC 글자4개 옆으로 배치 / 태블릿 사이즈 2열 / 모바일 세로로배치
+
+1) PC용 레이아웃 부터 만들면 쉬움
+2) flex-box 안쓰고 float만 써도 만들 수 있음
