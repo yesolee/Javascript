@@ -582,7 +582,7 @@ const Cart = lazy(() => import('./pages/Cart.js'));
  
  1. 만드는법
  - PWA가 셋팅된 리액트 프로젝트 생성하기
- => vs code 터미널에서 npx create-react-app my-app --template cra-temlate-pwa입력하여 작업 폴더 생성
+ => vs code 터미널에서 npx create-react-app my-app --template cra-template-pwa입력하여 작업 폴더 생성
  
  - 기존프로젝트를 PWA로 만들려면? 
  => 그냥 새 PWA 프로젝트 만들고 기존코드 복붙
