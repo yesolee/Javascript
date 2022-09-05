@@ -1,6 +1,7 @@
 1. react 파일 생성
 - npx create-react-app shop <- shop은 만들고싶은 폴더 명
-
+- app.js 파일에 작성
+- 미리보기 : npm start > localhost:3000
 2. 부트스트랩 사용 (html, css 편의상)
 - https://react-bootstrap.netlify.app 접속
 - vs code에서 npm install react-bootstrap bootstrap 입력 (22년 7월기준)
