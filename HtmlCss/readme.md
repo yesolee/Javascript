@@ -512,3 +512,7 @@ rel="apple-touch-icon-precomposed"
   <link rel="stylesheet" type="text/css" href="css/ie8.css" />
 <![endif]-->
   ```
+  
+  # 2022-09-20 
+  - background-img : width를 100%로 설정하면 안보이고 px로 설정하면 보임..
+  - 높이는 padding-top으로 조절, 부모의 height안정해진 경우 많아서
