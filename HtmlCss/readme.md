@@ -546,3 +546,27 @@ rel="apple-touch-icon-precomposed"
    
    * 실습 : css, style 쓰지 말고 bootstrap class 명만 사용해서 커스텀하기
    - Card, badge, shadow, Media Object 사용!
+   - https://getbootstrap.com/docs/5.0/utilities/sizing/
+   
+   * 반응형 레이아웃 만들때 bootstrap 매우 편리
+   - .row, .col 사용하면 균일하게 쪼개기 가능
+   - 한 행은 12칸 (.row)
+   - .col-6 : 6만큼 쓸게요
+   - .col-6 : 6만큼 쓸게요
+   => 반반 , .col이 합산 12가 되도록
+   
+   - .col 이용해 가로로 쪼갠걸 반응형으로? 
+   -> 조건문 더하면 됨
+   .col-md-6 : md사이즈 이상에서만 col-6 적용해주세요~
+   * sm : 576px < md : 768px < lg : 992px < xl :1200px
+   - grid system 검색
+   ** @media 문법 없이도 반응형 레이아웃 개발 가능
+   grid만 쓸 수 있느 저용량버전 bootstrap도 있음
+   일반 회사에서 이런식으로 class 미리 만들어놔서 레이아웃 사용하기도 함
+   
+   - order-first 부착해서 div 순서 재배치도 가능 (여기도 md조건식 가능
+   
+   ** 오늘의 숙제
+   - 팁1 : col 클래스는 여러개 써도 됩니다.
+   - 팁2 : Bootstrap 쓸땐 모바일 레이아웃 먼저 만들면 쉬움
+   
