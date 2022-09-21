@@ -513,6 +513,36 @@ rel="apple-touch-icon-precomposed"
 <![endif]-->
   ```
   
-  # 2022-09-20 
+  # Portpolio- landing Page 실습
+  
+  * 2022-09-20 
   - background-img : width를 100%로 설정하면 안보이고 px로 설정하면 보임..
   - 높이는 padding-top으로 조절, 부모의 height안정해진 경우 많아서
+  
+  * 2022-09-21
+  - background img의 사이즈가 width보다 작고, background-size가 contain인 경우중첩해서 그림이 나타난다.
+  밑에는 padding-top/bottom을 조정하면서 여러 장이 나오는데 width는 항상 꽉차게 나왔다.
+  혹은 width가 맞으면 heigth는 맞지 않았다.
+  
+  - 해당 그림이 여러 장 나와야 하는것이 아니라 한장만 나오면 되는 거였다.
+  - 이미지 사이즈를 줄이지 않고 효과를 주고 싶을땐 boarder를 건드린다.
+  
+  # Bootstrap 
+  - 왜쓰나? HTML, CSS 개발 시간 줄여줌
+  - 설치 : https://getbootstrap.com/ > Get Started (버전확인!)
+   1) bootstrap.min.css 파일 html head태그 안에 삽입
+   2) bootstrap.bundle.min.js 파일 html body태그 끝나기 전에 삽입
+   - 사용 : docs에서 검색해서 복붙
+     ex. Carousel 같은거 유용함 (카드 슬라이드)
+   - 응용 : bootstrap으로 뼈대 만들고 html 에 커스텀 css 파일 link태그로 넣어고, html에 class명 추가해서 width, font-size, color같은건 변경해서 사용
+   
+   ** 개발시간 단축하는 Utility class 
+   - div class="container" :  예쁜 반응형 padding 생김
+   - class명에 mt-3 추가하면 : margin-top 3만큼 줌 (1~5)
+   - padding-bottom : pd-3 (1~5)
+   - text-center : 가운데정렬
+   - fs-1 : 폰트사이즈 조정 (1~6)
+   - w-50 : width 50%
+   
+   * 실습 : css, style 쓰지 말고 bootstrap class 명만 사용해서 커스텀하기
+   - Card, badge, shadow, Media Object 사용!
