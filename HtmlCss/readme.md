@@ -779,3 +779,128 @@ progress::-webkit-progress-value {
   border-radius: 10px;
 }
 ```
+3. SASS (CSS 대용 언어, css 전처리기)
+- 조건문, 반복문, 함수 가능 : 프로그래밍스러운 문법 존재함
+-> 반복적인 부분 쉽게 처리 가능!
+- 큰 프로젝트에서 특히 도움 됨!
+
+1) 개발환경 셋팅
+- vscode 에디터사용
+- extension : Live Sass compiler 중 5버전 이상 설치
+
+2) html, sass파일 생성
+- 웹브라우저는 .css만 읽을 수 있음, .scss그런거 모름
+-> css변환해야 사용가능 (extension) : vscode 에디터 하단에 watch css 클릭
+-> 변환된 css파일을(.sass아님) html에 첨부
+- 코드는 scss에 짜고 저장하고 html에 넣을 땐 css파일 넣고
+* .map파일은 크롬 개발자도구 디버깅용 (map파일이 있으면 css파일 말고 scss파일을 분석해줌)
+
+3) sass를 쓰면 좋은 점(용도)
+ (1) 어려운 단어 기억해야 할 땐 변수문법 씀. ($변수명 : 저장해서쓸값;)
+```scss
+
+$메인칼라: pink;
+
+.box {
+  width: 100%;
+  background-color: $메인칼라;
+  color: white;
+}
+
+```
+=> 컴파일된 css파일에는 $메인칼라 부분에 pink가 남음
+
+  (2) 규칙적인 스타일 만들때도 변수 사용 가능
+ 
+  ```sass
+  
+  $기본사이즈: 16px; //이것만 바뀌면 다 한번에 바뀜
+
+.box-1 {
+  font-size: $기본사이즈 - 2px; // 사칙연산 바로 가능
+}
+
+.box-2 {
+  font-size: $기본사이즈 + 2px; 
+}
+
+.box-3 {
+  font-size: ($기본사이즈 * 2);  //괄호 쓰는게 좋음. 곱셈.나눗셈옆에는 단위안씀
+}
+  ```
+  
+  (3) 사칙연산 바로가능
+  - 단위는 맞춰야함
+  - $기본사이즈 : 16px + n px는 가능
+  - $기본사이즈 : 16% + n px는 X
+  
+  (4) 실은 css 기본 문법에도 변수같은거 있음
+  ```css
+  
+:root {
+  --main-color: red;
+}
+
+.box {
+  background-color: var(--main-color);
+} 
+
+  ```
+  - 근데 변수 이름 같은게 길고 복잡해서 sass가 편함
+  
+  (5) 실은 css에서도 사칙연산 가능
+```css
+.box {
+
+  font-size: calc(100px - 10px);
+} 
+/*  font-size: calc(40% - 20px); //이런것도 가능, 부모폭의 40% 후에 20px 빼줌 */
+
+```
+
+4. SASS 핵심 문법
+ 1) .scss와 .sass파일의 차이
+ - .sass 파일은 SASS문법 사용가능한데 괄호 안써도됨
+ ```sass
+ .box
+  color : red
+ ```
+  2) nesting 문법 : 관련있는 class들 묶을 때 좋음
+  
+  ```scss
+  .box {
+  h4 { // 태그안에 태그 스타일링 줄 수 있음 근데 2개 이상 중첩 ㄴㄴ
+    font-size: 16px;
+    span { // 이거 하지 말란소리
+    }
+  }
+  button {
+    color: red;
+  }
+}
+  ```
+  - 근데 좀 복잡해보여서 나눠서 쓰는게 좋아보임
+  
+  3) @extend 문법 : class 전체를 복사해줌. 
+  - 상황 : 중복된 스타일들이 많음 => 같은 모양의 색만 다른 버튼을 여러개(빨,초,파) 필요하다
+  - 사용 : @extend로 필요할때 복사해 사용
+  
+  ```scss
+  
+  %btn {         // %임시클래스명
+    width:100px;
+    height:100px;
+    padding:20px;
+  }
+  
+  .btn-green {
+    @extend %btn // 진짜 클래스 .box 써도 됨.
+    color:green; // 위에 똑같이 사용하고 color만 바꾸면 될때
+  }
+  
+  ```
+  
+  * %임시클래스 특징 : 선언만 하고 밑에서 안쓰면 컴파일 안됨.
+  . 진짜클래스는 선언만 해도 컴파일됨.
+  
+  
