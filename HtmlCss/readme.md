@@ -654,3 +654,128 @@ rel="apple-touch-icon-precomposed"
 - col은 1-12사이라서 1.2 10.8같이 미세 조정이 안된다
 - 다른 클래스들은 -md-사이즈 변환이 적용되는데 border는 먹히지 않는다.
 - ssafy 자소서 작성을 다시 해 보았다.
+
+# 2022-09-27
+
+1.  bootstrap 레이아웃 구축 팁
+
+1) inline-block
+- p태그, div :  block => 가로 진열 X, 높이나 폭 조정 O
+- span : inline => 가로 진열 O, 높이나 폭 조정 X
+- inline-block => 가로 진열 O, 높이나 폭 조정 O
+
+2) bootstrap 레이아웃 구축 팁
+- 많은 부트스트랩 요소들은 사이즈가 em으로 선언되어 있음
+- div 박스에 font-size : 00px 하면 한번에 사이즈 줄이거나 키울 수 있음
+- 안에있는 글자들이 각각 알맞은 비율로 줄어듬
+
+3) hr : 가로선 / vr : 세로선
+
+4) icons : svg 아이콘 복붙 가능. font Awesome 전부 첨부 안해도 되서 용량 줄일 수 있음.
+svg 태그를 원하는 위치에 삽입하여 사용
+
+
+2. pseudo-element
+** : pseudo class
+- (특정요소가)다른 상태일 떄 스타일 줄 수 있게 도와줌
+```css 예시
+.main-button :hover {
+  color:red;
+}
+```
+
+** ::pseudo-element
+- 내부의 일부분만 스타일 줄 때
+.main-content::
+```css 예시
+.main-content::first-line { //첫번째 줄만
+  color: red;
+  font-size: 30px;
+}
+```css 예시
+- :: first-letter : 문장의 첫 글자
+- :: after : 태그 안 맨 뒤에 글자 넣을 수 있음 (content:'안녕')
+- :: before : 맨앞에
+```
+
+** 활용분야
+1) float 줬던 요소 끝에 clear:both div 박스 대신 ::after로 가상의 박스 넣기
+```css
+.contact::after {
+  content: '';
+  display: block;
+  clear: both;
+  float: none;
+}
+```
+
+2) input에 파일 업로드 버튼 스타일링 (또는 shadow dom 활용하기)
+- input type="file"시 나타나는 버튼은 style태그를 열어도 설정이 변하지 않음
+```css
+.input-file::file-selector-button {
+  background: skyblue;
+  border: none;
+  padding: 20px;
+}
+.input-file::file-selector-button:hover {
+  background: pink;
+}
+```
+
+2. Shadow DOM
+- 크롬 개발자 도구 설정 > 사용자 에이전트 그림자 DOM표시
+- input태그 안에 숨겨진 요소들 볼 수 있음 (shadow DOM)
+- 개발자들이 하나만 적으면 자동으로 버튼이랑 span태그 생성되도록 편리하게 해둔 것
+- 버튼에 배경색 주고 싶은 경우 input에 바로 style주면 안먹힘
+
+1) ::pseudo-element 내부 일부만 스타일주고 싶을때 씀
+(개발자도구에서 'pseudo' element 찾아서 이름 사용)
+```css
+input[type='file']::-webkit-file-upload-button {
+  background: black;
+  color: white;
+}
+```
+*** 실제로는 파일 업로드 버튼은 label태그를 누르면 input도 누른거로 간주되기 떄문에 label에 스타일을 주고 버튼은 displayLnone으로 설정하는 편
+
+참고)
+* -webkit- : 크롬,사파리,엣지에서만 적용되는 스타일
+* -ms- : 익스클로어에서만 적용
+* -moz- : Firefox에서만 적용
+
+2) input 중 placeholder에 스타일 주고 싶을 때
+=> input박스와 placeholder안의 글자박스 2개가 겹쳐있는 것
+
+3) input 중 range에 스타일 주고 싶을 때
+- pseudo element가 안보이는 경우 클릭 후 개발자도구 하단에 보면
+사용자 에이전트 스타일시트(브라우저 기본 css)에서 엘리먼트 찾기
+```css
+input[type='range']::-webkit-slider-thumb {
+  appearance: none; // 브라우저 기본 css 안보이게
+  background: pink;
+  width: 50px;
+  height: 50px;
+}
+```
+
+** 참고
+- shadow DOM + 커스텀태그 만들 수도 있음
+ex. hello 태그 만들기
+=> JS사용해야함, 근데 태그 만들어서 쓸일 없음 ㅎ
+
+* 숙제 
+- progress 태그 커스텀 디자인 해보기
+- 테스트를 위해 firefox를 설치하였다.
+- gradient를 주어 꾸며보았다.
+```css
+progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    -45deg,
+    pink,
+    pink 10px,
+    white,
+    white 20px
+  );
+  border-radius: 10px;
+}
+```
