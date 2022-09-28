@@ -929,5 +929,14 @@ h2 {
 - 컴파일 안하는 scss파일은 _파일명.scss로 작명하면 css파일로 변환 안함
 - 다른 파일의 @mixin, $변수 이런것도 가져올 수 있음
 - 다른파일의 @mixin쓰려면 @include 파일명.mixin이름
+```scss
+@use '_reset';
 
+h2 {
+  color: reset.$메인칼라;
+}
+```
 3. function, if, for .. 쓸일 거의 없음
+
+*** 응용
+- 자주사용하는 _button.scss, _navbar.scss이런 파일들은 미리 다 만들어 놓고 첨부식으로 css 개발
