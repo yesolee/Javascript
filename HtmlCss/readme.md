@@ -940,3 +940,86 @@ h2 {
 
 *** 응용
 - 자주사용하는 _button.scss, _navbar.scss이런 파일들은 미리 다 만들어 놓고 첨부식으로 css 개발
+
+# 2022-10-05
+
+1. video 태그 안에 source 태그 지정해주면 호환성 잡기 좋음
+보통 용량 적은걸 맨위에 놓음
+```html
+    <video controls autoplay(자동재생) muted(음소거)> //크롬은 muted가 있어야 자동재생됨
+      <source src="bridge.mp4" type="video/mp4" > // 이거해보고 안되면
+      <source src="bridge-m.webm" type="video/mp4" > // 이거트세요
+    </video>
+```
+
+- 속성: preload(미리다운받을지), poster(썸네일이미지), preload(영상먼저다운받을지 말지, auto, metadata, none)
+* 비디오 배경으로 넣을 수 있는데 느리고 유행지남
+
+- 궁극의 가운데 정렬법
+```js
+position : absolute;
+top : 50%;
+left: 50%;
+transform : translate(-50%, -50%);
+// 이렇게 주면 position:relative가진 부모에 대해 정가운데 위치시킬 수 있음
+```
+
+2. 애니메이션
+
+1) a->b : one-way 애니메이션: transition
+
+2) a->b->c / a->b->a / a->1초정지->b : @keyframes
+
+3) transform : 왜씀 ? 성능좋음, 애니메이션 많이 쓰면 사이트 느려지면 역효과
+(60프레임으로 잘 동작해야함)
+- rotate(180deg) 회전
+- translate(100px) 좌표이동 (애니메이션 줄때 margin보다 부드러움)
+: margin 변경이 느림, 페이지 내의 js코드, html코드가 길면 느림
+
+
+*** 뭐든 구현에서 그치면 초보, 구현 다음엔 성능, 확장성...
+
+** 웹브라우저는 html, css코드를 그래픽으로 바꿔주는 간단한 프로그램
+1) Render Tree만들기 (css정리한 참고 자료)
+2) layout 잡기 (width, height, margin, padding, left..)
+3) paint 하기 (픽셀에 칠함) background-color..
+4) composite 처리 (transform, opacity 등 처리) => **다른 쓰레드에서 처리해줌
+=> 갑자기 width 변경하면 ? layout(2)다시잡음 => 3=>4도 다시해야함
+=> 4단계 속성 변경하면 부담이 덜함 => margin보다 transform 변경시 처리 빠름
+
+* 웹 브라우저는 쓰레드 1개만 사용
+- 자바스크립트 실행, html css 처리, 전부 한 곳에서 함
+- transform 이런건 다른 쓰레드에서 처리해줌
+
+* will-change, 3D animation 사기치기 사용하면 성능 개선 가능
+
+(1) translated3d 
+- 애니메이션이 너무 많아 CPU만으로 전부 연산이 불가능하다면 GPU의 도움을 받을 수 있음. 레이어로 따로 관리되어 다른 엘리먼트와 독립되어 렌더링 된 후 합쳧짐.(화면위에 그려짐) 나중에 합쳐짐=>지연현상이 발생함.깜빡임.
+
+```css
+.box {
+  transform: translated3d(0, 0, 0);
+}
+```
+- 3d는 gpu를 사용해서 연산함. 0,0,0을 주어 움직이지 않는 3d명령을 주고 뒤에 필요한 transform 적용하면 gpu이용해 속성 연산 가능. 부담 덜고 싶을때 사용
+- 하지만 이 방법은 GPU에의해 합성되는 레이어로 RAM이나 GPU 메모리 사용량이 커지며 레이어를 많이 생성할수록 악영향을 끼치므로 또 다른 성능 병목이 발생할 수 있는지 확인하는 등 주의가 필요한다. 
+
+** CPU : 컴퓨터의 메인보드에 장착돼 있는 부품. 거의 모든 연산 처리를 담당, 컴퓨터의 두뇌
+** GPU : 그래픽 카드에 탑재되어 있는 부품으로, 이미지나 영상 등 그래픽 처리등을 담당 (+그래픽 표현에 필요한 복잡한 기하학적 연산 처리도 담당)
+
+
+(2) will-change
+- 애니메이션을 주는 요소(ex.div)가 약간 느리게 동작한다면 will-change: 애니메이션줄속성;
+: 미리 렌더링해주는 속성. 하지만 평소에는 안쓰고 뭔가 이상하게 버벅일 떄만 쓰길! 이상하게 많이쓰면 더 느려짐
+- 엘리먼트에 어떤 변경을 할 것인지 미리 브라우저에 알려주는 것이 역할, 변경이 시작되기전 최적화 가능. 레이어로 따로 관리되기 때문에 
+```css
+.div {
+  will-change : transform;
+}
+```
+
+* .부모클래스:hover .자식클래스{
+  // 부모클래스 호버시 자식클래스 이렇게 해주세요~
+}
+
+
