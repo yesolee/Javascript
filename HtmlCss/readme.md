@@ -992,6 +992,7 @@ transform : translate(-50%, -50%);
 - transform 이런건 다른 쓰레드에서 처리해줌
 
 * will-change, 3D animation 사기치기 사용하면 성능 개선 가능
+> https://dev.opera.com/articles/ko/css-will-change-property/
 
 (1) translated3d 
 - 애니메이션이 너무 많아 CPU만으로 전부 연산이 불가능하다면 GPU의 도움을 받을 수 있음. 레이어로 따로 관리되어 다른 엘리먼트와 독립되어 렌더링 된 후 합쳧짐.(화면위에 그려짐) 나중에 합쳐짐=>지연현상이 발생함.깜빡임.
