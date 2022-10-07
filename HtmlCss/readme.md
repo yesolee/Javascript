@@ -1023,4 +1023,89 @@ transform : translate(-50%, -50%);
   // 부모클래스 호버시 자식클래스 이렇게 해주세요~
 }
 
+# 2022-10-07
 
+1. 만들기 어려울땐 한글로 순서대로 적고 바꾸기!
+- 왼쪽회전 오른쪽회전 왼쪽회전 제자리
+```css
+
+@keyframes 흔들기 {
+  0% { 
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+```
+
+2. position:fixed; 모든 요소 앞에 등장
+
+3. display:grid
+- 모눈종이에 그림 그려서 색칠하는 느낌
+- 익스플로어 x, 엣지O
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+}
+
+.grid-container div {
+  border: 1px solid black;
+}
+
+```
+
+1) 1fr : 전제 폭에 대해 1배
+- 1fr : 1fr : 1fr => 1:1:1로 쪼개주세요
+
+2) 레이아웃만들려면
+방법1) 내부박스에게 명령 : grid-colum, grid-row주기 
+```css
+.grid-nav {
+  grid-column: 1/4; //세로선 1~ 4까
+}
+
+
+```
+
+또 다른 방법 2) 자식에 이름쓰고 부모는 색칠하기
+``` css
+.grid-container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-template-areas:
+    '헤더 헤더 헤더 헤더'
+    '사이드 . . .'
+    '사이드 . . .';
+}
+.grid-nav {
+  grid-area: 헤더;
+}
+
+.grid-sidebar {
+  grid-area: 사이드;
+}
+3) 언제쓰는가 ?  큰 레이아웃 잡을 때보다는 자잘한 부분에서 엑셀같은 격자가 필요할때 사용 !
+
+* 이미지는 글자처럼 취급되서 baseline 위에 생겨서 밑에 하얀 줄같은게 생김. 없애고싶으면 display:block;
+
+```
+
+5. position: sticky
+- 조건부로!! fixed: 처음엔고정X, 뷰포트안에top:n px, 부모박스 넘어서면 해제
+- 스크롤을 할 만한 부모 박스가 있어야 하고, top등 좌표속성과 함께 써야함.
+** position: fixed
+- 화면에 딱 고정
